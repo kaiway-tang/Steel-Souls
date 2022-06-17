@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class cameraScript : MonoBehaviour
 {
-    [SerializeField] Transform camTrfm;
+    [SerializeField] Transform camTrfm, camPoint;
     Transform playerTrfm; Vector3 zOffset = new Vector3(0,0,10);
     int mode;
     const int follow = 0;
@@ -12,6 +12,7 @@ public class cameraScript : MonoBehaviour
     void Start()
     {
         playerTrfm = dataMan.playerTrfm;
+        camTrfm.parent = null;
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class cameraScript : MonoBehaviour
     {
         if (mode == follow)
         {
-            camTrfm.position += ((playerTrfm.position-zOffset) - camTrfm.position) / 10f;
+            camTrfm.position += (camPoint.position-zOffset - camTrfm.position) / 10f;
         }
     }
 }

@@ -1,0 +1,4 @@
+super classes' automatic functions start with _ followed by name
+	ex: FixedUpdate() -> _FixedUpdate()
+	should be called in respective sub class functions
+	call at function start by default
