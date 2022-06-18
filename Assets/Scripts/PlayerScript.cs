@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerScript : MobileEntity
 {
     [SerializeField] bool sameJumpAndUp;
-    [SerializeField] float spd, jumpPower;
+    [SerializeField] float spd, jumpPwr;
     KeyCode jumpKey, upKey, downKey, leftKey, rightKey;
     KeyCode basicKey, mobilityKey, superKey, specialKey;
 
+    [SerializeField] Animator slashAnim;
     Vector3 dashVect;
     int mobilityTmr;
     int basicCD, mobilityCD, superCD, specialCD;
@@ -17,7 +18,7 @@ public class PlayerScript : MobileEntity
 
     private void Start()
     {
-        _Start(transform, GetComponent<Rigidbody2D>(), spd, jumpPower, 1);
+        _Start(transform, GetComponent<Rigidbody2D>(), spd, jumpPwr, 1);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
         basicKey = KeyCode.U; mobilityKey = KeyCode.I; superKey = KeyCode.O; specialKey = KeyCode.P;
     }
@@ -38,6 +39,11 @@ public class PlayerScript : MobileEntity
             mobilityTmr--;
             rb.velocity = dashVect;
             if (mobilityTmr == 0) ZeroVelocity();
+        }
+
+        if (Input.GetKey(basicKey) && basicCD < 1)
+        {
+            castBasic();
         }
 
         if (!IsKnocked())
@@ -74,6 +80,12 @@ public class PlayerScript : MobileEntity
         if (specialCD > 0) specialCD--;
     }
 
+    void castBasic()
+    {
+        SetKnocked(8);
+        slashAnim.Play();
+        basicCD = 25;
+    }
     void castMobiltiy()
     {
         SetKnocked(7);
@@ -81,7 +93,7 @@ public class PlayerScript : MobileEntity
         dashVect = GetCardinalDirectionVector() * 30;
         rb.velocity = dashVect;
         mobilityTmr = 7;
-        mobilityCD = 25;
+        mobilityCD = 40;
     }
 
     int lastCardinalDir;
