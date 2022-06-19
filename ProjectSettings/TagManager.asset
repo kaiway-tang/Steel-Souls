@@ -14,7 +14,7 @@ TagManager:
   - terrain
   - onGround
   - attack
-  - 
+  - hitbox
   - 
   - 
   - 
@@ -43,4 +43,10 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1094459901
+    locked: 0
+  - name: Foreground
+    uniqueID: 3308661071
+    locked: 0
+  - name: Effects
+    uniqueID: 3347862657
     locked: 0
