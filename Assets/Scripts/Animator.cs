@@ -8,6 +8,7 @@ public class Animator : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     [SerializeField] int[] times;
     [SerializeField] bool destroyOnFinish, stop;
+    public Transform trfm;
     int timer, index = 1;
     // Start is called before the first frame update
     void Start()

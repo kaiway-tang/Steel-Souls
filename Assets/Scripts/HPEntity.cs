@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    int hp, maxHP;
+    [SerializeField] int maxHP, hp;
 
-    public bool TakeDamage(int amount) //return true if entity is killed
+    protected int entityID;
+    public static int undefinedID = 0, playerID = 1;
+
+    private void Start() { _Start(); }
+    protected void _Start(int pEntityID = 0) { entityID = pEntityID; hp = maxHP; }
+    public bool TakeDamage(int amount, int ignoreID = -1) //return true if entity is killed
     {
+        if (ignoreID == entityID) return false;
         hp -= amount;
         if (hp <= 0)
         {

@@ -9,19 +9,17 @@ public class MobileEntity : HPEntity
     Vector2 vect2; Vector3 vect3;
 
     protected int currentFacing, doubleJumps, remainingJumps;
-    protected const int leftDir = 1, rightDir = 0;
+    protected const int leftFace = 1, rightFace = 0;
     protected float speed, jumpPower, defaultGravity;
 
     protected int knockedTmr, noGravityTmr;
 
     protected bool isOnGround;
 
-    private void Start()
+    private void Start() { _Start(transform, GetComponent<Rigidbody2D>(), 0, 0, 0, 0); }
+    protected void _Start(Transform pTrfm, Rigidbody2D prb, int entityID, float pSpd, float pJumpPower, int pDoubleJumps = 0)
     {
-
-    }
-    protected void _Start(Transform pTrfm, Rigidbody2D prb, float pSpd, float pJumpPower, int pDoubleJumps = 0)
-    {
+        _Start(entityID);
         rb = prb; defaultGravity = rb.gravityScale;
         trfm = pTrfm;
         speed = pSpd;
@@ -52,7 +50,7 @@ public class MobileEntity : HPEntity
     protected void FaceDir(int direction)
     {
         if (currentFacing == direction) return;
-        if (direction == leftDir)
+        if (direction == leftFace)
         {
             if (trfm.localScale.x > 0) vect3.x = -trfm.localScale.x;
             else vect3.x = trfm.localScale.x;

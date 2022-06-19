@@ -10,25 +10,26 @@ public class PlayerScript : MobileEntity
     KeyCode basicKey, mobilityKey, superKey, specialKey;
 
     [SerializeField] Animator slashAnim;
+    [SerializeField] CapsuleCollider2D slashCol;
+    [SerializeField] ParticleSystem dashPtclSys;
     Vector3 dashVect;
-    int mobilityTmr;
+    int slashTmr, mobilityTmr;
     int basicCD, mobilityCD, superCD, specialCD;
 
     Vector3 vect3a, vect3b;
 
     private void Start()
     {
-        _Start(transform, GetComponent<Rigidbody2D>(), spd, jumpPwr, 1);
+        _Start(transform, GetComponent<Rigidbody2D>(), playerID, spd, jumpPwr, 1);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
         basicKey = KeyCode.U; mobilityKey = KeyCode.I; superKey = KeyCode.O; specialKey = KeyCode.P;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(jumpKey) || (Input.GetKeyDown(upKey) && sameJumpAndUp))
-        {
-            Jump();
-        }
+        if (Input.GetKeyDown(jumpKey) || (Input.GetKeyDown(upKey) && sameJumpAndUp)) Jump();
+        if (Input.GetKeyDown(leftKey) && !IsKnocked()) FaceDir(leftFace);
+        if (Input.GetKeyDown(rightKey) && !IsKnocked()) FaceDir(rightFace);
     }
     private void FixedUpdate()
     {
@@ -38,26 +39,29 @@ public class PlayerScript : MobileEntity
         {
             mobilityTmr--;
             rb.velocity = dashVect;
-            if (mobilityTmr == 0) ZeroVelocity();
+            if (mobilityTmr == 0)
+            {
+                ZeroVelocity();
+                dashPtclSys.Stop();
+            }
+        }
+        if (slashTmr > 0) 
+        {
+            slashTmr--;
+            if (slashTmr < 1) slashCol.enabled = false;
         }
 
-        if (Input.GetKey(basicKey) && basicCD < 1)
-        {
-            castBasic();
-        }
+        if (Input.GetKey(basicKey) && basicCD < 1) castBasic();
 
         if (!IsKnocked())
         {
-            if (Input.GetKey(mobilityKey) && mobilityCD < 1)
-            {
-                castMobiltiy();
-            }
+            if (Input.GetKey(mobilityKey) && mobilityCD < 1) castMobiltiy();
 
             if (Input.GetKey(leftKey))
             {
                 if (!Input.GetKey(rightKey))
                 {
-                    FaceDir(leftDir);
+                    FaceDir(leftFace);
                     SetVelX(-spd);
                 }
             }
@@ -65,7 +69,7 @@ public class PlayerScript : MobileEntity
             {
                 if (!Input.GetKey(leftKey))
                 {
-                    FaceDir(rightDir);
+                    FaceDir(rightFace);
                     SetVelX(spd);
                 }
             } else
@@ -83,7 +87,10 @@ public class PlayerScript : MobileEntity
     void castBasic()
     {
         SetKnocked(8);
+        slashAnim.trfm.rotation = GetRelativeCardinalDirectionAngle();
         slashAnim.Play();
+        slashCol.enabled = true;
+        slashTmr = 8;
         basicCD = 25;
     }
     void castMobiltiy()
@@ -94,11 +101,12 @@ public class PlayerScript : MobileEntity
         rb.velocity = dashVect;
         mobilityTmr = 7;
         mobilityCD = 40;
+        dashPtclSys.Play();
     }
 
     int lastCardinalDir;
     const int cardinalN = 0, cardinalNE = 1, cardinalE = 2, cardinalSE = 3, cardinalS = 4, cardinalSW = 5, cardinalW = 6, cardinalNW = 7;
-    protected int GetCardinalDirection()
+    private int GetCardinalDirection()
     {
         if (Input.GetKey(upKey) && !Input.GetKey(downKey))
         {
@@ -138,7 +146,7 @@ public class PlayerScript : MobileEntity
             else
             {
                 //either no keys or all keys held;
-                if (currentFacing == leftDir)
+                if (currentFacing == leftFace)
                 {
                     lastCardinalDir = cardinalW;
                 } else
@@ -150,7 +158,7 @@ public class PlayerScript : MobileEntity
 
         return lastCardinalDir;
     } //returns a cardinal direction based on directional input
-    protected Vector3 GetCardinalDirectionVector() //also sets lastCardinalDirection
+    private Vector3 GetCardinalDirectionVector() //also sets lastCardinalDirection
     {
         vect3a.z = 0;
         switch (GetCardinalDirection())
@@ -188,9 +196,19 @@ public class PlayerScript : MobileEntity
                 vect3a.y = .707f;
                 break;
         }
-        Debug.Log("vect3a: "+ vect3a);
         return vect3a;
     }
+    private Quaternion GetCardinalRawDirectionAngle() //also sets lastCardinalDirection, also probs doesnt work
+    {
+        return Quaternion.Euler(0, 0, 90 - 45 * GetCardinalDirection());
+    }
+    private Quaternion GetRelativeCardinalDirectionAngle() //takes into account reflecting of player sprite
+    {
+        bool neg90 = false;
+        if (GetCardinalDirection() > 4 || (lastCardinalDir % 4 == 0 && currentFacing == leftFace)) neg90 = true;
 
+        if (neg90) return Quaternion.Euler(0, 0, -90 - GetCardinalDirection() * 45);
+        return Quaternion.Euler(0, 0, 90 - GetCardinalDirection() * 45);
+    }
 
 }
