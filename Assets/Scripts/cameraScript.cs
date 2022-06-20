@@ -6,13 +6,8 @@ public class cameraScript : MonoBehaviour
 {
     [SerializeField] Transform camTrfm, camPoint;
     Transform playerTrfm; Vector3 zOffset = new Vector3(0,0,10), leftRotatedZero = new Vector3(0,0,360), shockRotation = Vector3.zero;
-    public static cameraScript camScr;
     int mode;
     const int follow = 0;
-    private void Awake()
-    {
-        camScr = GetComponent<cameraScript>();
-    }
     void Start()
     {
         playerTrfm = dataMan.playerTrfm;

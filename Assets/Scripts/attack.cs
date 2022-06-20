@@ -5,11 +5,6 @@ using UnityEngine;
 public class attack : MonoBehaviour
 {
     [SerializeField] protected int entityID, damage;
-    protected void _Start(int pDamage, int pEntityID = 0)
-    {
-        damage = pDamage;
-        entityID = pEntityID;
-    }
     protected void _OnTriggerEnter2D(Collider2D col)
     {
         HPEntity HPScr;
@@ -17,6 +12,19 @@ public class attack : MonoBehaviour
         {
             HPScr.TakeDamage(damage);
         }
+    }
+    protected void _OnTriggerEnter2D(HPEntity HPScr)
+    {
+        HPScr.TakeDamage(damage);
+    }
+    protected HPEntity GetHPScr(Collider2D col)
+    {
+        HPEntity HPScr;
+        if (HPScr = col.GetComponent<HPEntity>())
+        {
+            return HPScr;
+        }
+        return null;
     }
     private void OnTriggerEnter2D(Collider2D col)
     {

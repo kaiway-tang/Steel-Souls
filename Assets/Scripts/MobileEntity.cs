@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MobileEntity : HPEntity
 {
-    protected Transform trfm;
     protected Rigidbody2D rb;
     Vector2 vect2; Vector3 vect3;
 

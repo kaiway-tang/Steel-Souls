@@ -4,29 +4,49 @@ using UnityEngine;
 
 public class objectPooler : MonoBehaviour
 {
+    [SerializeField] int count;
     int index, end;
-    GameObject obj;
-    [SerializeField] GameObject[] objPool;
-    [SerializeField] Transform[] trfmPool;
+    [SerializeField] GameObject obj;
+    GameObject[] objPool;
+    Transform[] trfmPool;
     [SerializeField] bool[] inUse;
-
-    public GameObject Instantiate(Vector2 position, Quaternion rotation)
+    private void Start()
     {
-        while (inUse[index])
+        objPool = new GameObject[count];
+        trfmPool = new Transform[count];
+        inUse = new bool[count];
+
+        for (int i = 0; i < count; i++)
         {
+            trfmPool[i] = Instantiate(obj).GetComponent<pooledObject>().Instantiate(i+1, this);
+            objPool[i] = trfmPool[i].gameObject;
+        }
+    }
+
+    public GameObject Instantiate(Vector2 position, Quaternion rotation, int count = 1)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            while (inUse[index])
+            {
+                index++;
+                if (index == inUse.Length) index = 0;
+                if (index == end)
+                {
+                    Debug.Log("we out");
+                    return Instantiate(obj, position, rotation);
+                }
+            }
+            end = index;
+
+            trfmPool[index].position = position;
+            trfmPool[index].rotation = rotation;
+            inUse[index] = true;
+            objPool[index].SetActive(true);
+
             index++;
             if (index == inUse.Length) index = 0;
-            if (index == end) return Instantiate(obj, position, rotation);
         }
-        end = index;
-
-        objPool[index].SetActive(true);
-        trfmPool[index].position = position;
-        trfmPool[index].rotation = rotation;
-        inUse[index] = true;
-
-        index++;
-        if (index == inUse.Length) index = 0;
 
         return objPool[index];
     }

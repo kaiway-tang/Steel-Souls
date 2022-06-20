@@ -5,6 +5,7 @@ using UnityEngine;
 public class HPEntity : MonoBehaviour
 {
     [SerializeField] int maxHP, hp;
+    [SerializeField] protected Transform trfm;
 
     protected int entityID;
     public static int undefinedID = 0, playerID = 1;
@@ -21,6 +22,10 @@ public class HPEntity : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public Vector3 GetPos()
+    {
+        return trfm.position;
     }
     public bool Heal(int amount) //return true if entity is now full hp
     {
