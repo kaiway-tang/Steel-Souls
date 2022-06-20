@@ -45,13 +45,16 @@ public class PlayerScript : MobileEntity
                 dashPtclSys.Stop();
             }
         }
-        if (slashTmr > 0) 
+        if (slashTmr > 0)
         {
             slashTmr--;
-            if (slashTmr < 1) slashCol.enabled = false;
+            if (slashTmr < 1)
+            {
+                slashCol.enabled = false;
+            }
         }
 
-        if (Input.GetKey(basicKey) && basicCD < 1) castBasic();
+            if (Input.GetKey(basicKey) && basicCD < 1) castBasic();
 
         if (!IsKnocked())
         {

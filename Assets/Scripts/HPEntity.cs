@@ -10,7 +10,7 @@ public class HPEntity : MonoBehaviour
     protected int entityID;
     public static int undefinedID = 0, playerID = 1;
 
-    private void Start() { _Start(); }
+    private void Start() { Debug.Log("im starting??"); _Start(); }
     protected void _Start(int pEntityID = 0) { entityID = pEntityID; hp = maxHP; }
     public bool TakeDamage(int amount, int ignoreID = -1) //return true if entity is killed
     {

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MobileEntity : HPEntity
 {
-    protected Rigidbody2D rb;
+    [SerializeField] protected Rigidbody2D rb;
     Vector2 vect2; Vector3 vect3;
 
-    protected int currentFacing, doubleJumps, remainingJumps;
-    protected const int leftFace = 1, rightFace = 0;
+    protected bool currentFacing;
+    protected int doubleJumps, remainingJumps;
+    protected const bool leftFace = true, rightFace = false;
     protected float speed, jumpPower, defaultGravity;
 
     protected int knockedTmr, noGravityTmr;
@@ -18,9 +19,13 @@ public class MobileEntity : HPEntity
     private void Start() { _Start(transform, GetComponent<Rigidbody2D>(), 0, 0, 0, 0); }
     protected void _Start(Transform pTrfm, Rigidbody2D prb, int entityID, float pSpd, float pJumpPower, int pDoubleJumps = 0)
     {
-        _Start(entityID);
         rb = prb; defaultGravity = rb.gravityScale;
         trfm = pTrfm;
+        _Start(entityID, pSpd, pJumpPower, pDoubleJumps);
+    }
+    protected void _Start(int entityID, float pSpd, float pJumpPower, int pDoubleJumps = 0)
+    {
+        _Start(entityID);
         speed = pSpd;
         jumpPower = pJumpPower;
         doubleJumps = pDoubleJumps;
@@ -46,7 +51,7 @@ public class MobileEntity : HPEntity
         vect2.x = rb.velocity.x; vect2.y = val;
         rb.velocity = vect2;
     }
-    protected void FaceDir(int direction)
+    protected void FaceDir(bool direction)
     {
         if (currentFacing == direction) return;
         if (direction == leftFace)
