@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -947104639
   m_SortingLayer: 3
-  m_SortingOrder: 50
+  m_SortingOrder: 410
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -152,8 +152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityID: 1
   damage: 10
+  knockback: 16
+  sourceTrfm: {fileID: 0}
   slashPool: {fileID: 1564124932288073095}
-  trfm: {fileID: 8782586479932713444}
 --- !u!1 &6226600036767902865
 GameObject:
   m_ObjectHideFlags: 0

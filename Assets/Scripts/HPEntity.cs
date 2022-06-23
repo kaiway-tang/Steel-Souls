@@ -6,23 +6,25 @@ public class HPEntity : MonoBehaviour
 {
     [SerializeField] int maxHP, hp;
     [SerializeField] protected Transform trfm;
+    [SerializeField] bool isHighestParent;
 
     protected int entityID;
     public static int undefinedID = 0, playerID = 1;
 
-    private void Start() { Debug.Log("im starting??"); _Start(); }
+    private void Start() { _Start(); }
     protected void _Start(int pEntityID = 0) { entityID = pEntityID; hp = maxHP; }
-    public bool TakeDamage(int amount, int ignoreID = -1) //return true if entity is killed
+    public bool TakeDamage(int amount, int ignoreID = -1) //return true if entity is still alive
     {
-        if (ignoreID == entityID) return false;
+        if (ignoreID == entityID) return true;
         hp -= amount;
         if (hp <= 0)
         {
             Die();
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
+    public virtual void knockback(Vector2 source, int strength, int ignoreID = -1) { }
     public Vector3 GetPos()
     {
         return trfm.position;
@@ -40,7 +42,15 @@ public class HPEntity : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        Destroy(trfm.gameObject);
+    }
+    Transform GetHighestParent(Transform pTrfm)
+    {
+        if (pTrfm.parent)
+        {
+            return GetHighestParent(pTrfm.parent);
+        }
+        return pTrfm;
     }
 
     public int GetHP()
@@ -50,5 +60,9 @@ public class HPEntity : MonoBehaviour
     public int GetMaxHP()
     {
         return maxHP;
+    }
+    public int getEntityID()
+    {
+        return entityID;
     }
 }

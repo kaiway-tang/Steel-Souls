@@ -5,6 +5,7 @@ using UnityEngine;
 public class MobileEntity : HPEntity
 {
     [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] float knockbackFactor = 1;
     Vector2 vect2; Vector3 vect3;
 
     protected bool currentFacing;
@@ -33,7 +34,11 @@ public class MobileEntity : HPEntity
 
     protected void _FixedUpdate()
     {
-        if (knockedTmr > 0) knockedTmr--;
+        if (knockedTmr > 0)
+        {
+            knockedTmr--;
+            if (knockedTmr < 1) rb.sharedMaterial = Toolbox.defaultMaterial;
+        }
         if (noGravityTmr > 0)
         {
             noGravityTmr--;
@@ -96,8 +101,22 @@ public class MobileEntity : HPEntity
     }
     protected void SetKnocked(int duration) //makes the entity unable to move (use for knockback, knockup, etc) 
     {
-        if (knockedTmr < duration) knockedTmr = duration;
+        if (knockedTmr < duration)
+        {
+            knockedTmr = duration;
+            rb.sharedMaterial = Toolbox.frictionMaterial;
+        }
     }
+    public override void knockback(Vector2 source, int strength, int ignoreID = -1)
+    {
+        if (entityID == ignoreID) return;
+        strength = (int)(strength * knockbackFactor);
+        vect2.x = source.x - trfm.position.x;
+        vect2.y = source.y - trfm.position.y;
+        rb.velocity = vect2.normalized * -strength;
+        SetKnocked(strength);
+    }
+
     protected bool HasGravity()
     {
         return noGravityTmr < 1;

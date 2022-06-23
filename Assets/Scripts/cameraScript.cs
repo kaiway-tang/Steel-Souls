@@ -10,7 +10,7 @@ public class cameraScript : MonoBehaviour
     const int follow = 0;
     void Start()
     {
-        playerTrfm = dataMan.playerTrfm;
+        playerTrfm = Toolbox.playerTrfm;
         camTrfm.parent = null;
     }
 

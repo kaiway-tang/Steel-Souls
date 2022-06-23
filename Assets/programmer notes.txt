@@ -1,3 +1,5 @@
+dash disabled via keybind (to esc), double jump disabled via mobile entity double jump parameter
+
 
 MISC:
 
@@ -14,11 +16,19 @@ LAYERS:
 
 Default
 
+Background:
+	0	: background tiles
+	10	: wall tiles
+
 Player
 	0   : base sprite
 	100 : dashFX (particles)
 	200 : slashFX (slash sprite)
 
+Foreground:
+	0	: tiles
+
 Effects:
-	45	: slashFX
-	50	: front slash
+	100 : fog
+	400	: slashFX
+	410	: front slash

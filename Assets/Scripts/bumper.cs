@@ -7,6 +7,7 @@ public class bumper : MonoBehaviour
     [SerializeField] patroller patrollerScr;
     private void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log("bumped: "+col.gameObject);
         patrollerScr.bumped();
     }
 }

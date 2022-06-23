@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5878256075091300346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6653751776648433131}
+  m_Layer: 0
+  m_Name: emptyTrfm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6653751776648433131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5878256075091300346}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6675375418563153027}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6675375418563153023
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +42,7 @@ GameObject:
   - component: {fileID: 6675375418563153020}
   - component: {fileID: 6675375418563153022}
   - component: {fileID: 6675375418563153026}
-  - component: {fileID: 6675375418563153021}
+  - component: {fileID: 4759439923906040170}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -30,7 +60,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6653751776648433131}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -100,9 +131,9 @@ MonoBehaviour:
   camTrfm: {fileID: 6675375418563153027}
   camPoint: {fileID: 0}
   trauma: 0
-  screenShakeStrength: 0.1
+  screenShakeStrength: 0.05
   shock: 0
---- !u!114 &6675375418563153021
+--- !u!114 &4759439923906040170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +142,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6675375418563153023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9189e5fb6b49744fb7508285223f663, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f908810e47730245b335c1e3ace6bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   s_PlayerTrfm: {fileID: 0}
+  s_emptyTrfm: {fileID: 6653751776648433131}
+  s_defaultMaterial: {fileID: 6200000, guid: dca96cd0129f4a54e9c14e8189ad4b4d, type: 2}
+  s_frictionMaterial: {fileID: 6200000, guid: ba04d171f43fee64199574e2568c36c0, type: 2}

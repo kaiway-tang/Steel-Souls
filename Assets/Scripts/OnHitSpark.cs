@@ -11,7 +11,7 @@ public class OnHitSpark : pooledObject
     {
         tmr = 0;
         trfm.localScale = Vector3.one;
-        Toolbox.FaceObj(trfm, dataMan.playerTrfm.position);
+        Toolbox.FaceObj(trfm, Toolbox.playerTrfm.position);
         trfm.Rotate(Vector3.forward * Random.Range(150,210));
     }
     private void FixedUpdate()

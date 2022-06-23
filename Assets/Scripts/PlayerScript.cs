@@ -20,9 +20,9 @@ public class PlayerScript : MobileEntity
 
     private void Start()
     {
-        _Start(transform, GetComponent<Rigidbody2D>(), playerID, spd, jumpPwr, 1);
+        _Start(trfm, rb, playerID, spd, jumpPwr, 0);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
-        basicKey = KeyCode.U; mobilityKey = KeyCode.I; superKey = KeyCode.O; specialKey = KeyCode.P;
+        basicKey = KeyCode.U; mobilityKey = KeyCode.Escape; superKey = KeyCode.O; specialKey = KeyCode.P;
     }
 
     private void Update()
