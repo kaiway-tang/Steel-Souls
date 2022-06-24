@@ -58,7 +58,7 @@ Transform:
   m_GameObject: {fileID: 5765570012926439489}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children:
   - {fileID: 5277710376665800693}
   - {fileID: 5765570014466908663}
@@ -185,7 +185,7 @@ MonoBehaviour:
   knockbackFactor: 2
   sameJumpAndUp: 0
   spd: 9
-  jumpPwr: 22
+  jumpPwr: 23
   slashAnim: {fileID: 1915926054236966074}
   slashCol: {fileID: 4089410118452266604}
   dashPtclSys: {fileID: 5352799993773423271}
