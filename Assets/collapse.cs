@@ -7,7 +7,7 @@ public class collapse : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] collapse[] others;
     [SerializeField] bool entityTrigger;
-    [SerializeField] Collider2D collider;
+    [SerializeField] Collider2D col2D;
     bool collapsed;
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -22,10 +22,10 @@ public class collapse : MonoBehaviour
     void TriggerCollapse()
     {
         if (collapsed) return;
-        collider.enabled = false;
+        col2D.enabled = false;
         rb.bodyType = RigidbodyType2D.Dynamic;
         Invoke("CN", 0.1f);
-        Destroy(gameObject, 5);
+        Destroy(gameObject, 2);
         collapsed = true;
     }
     void CN() //CollapseNeighbors

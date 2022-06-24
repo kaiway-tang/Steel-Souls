@@ -105,4 +105,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   entityTrigger: 0
-  collider: {fileID: 7452825562805786520}
+  col2D: {fileID: 7452825562805786520}
