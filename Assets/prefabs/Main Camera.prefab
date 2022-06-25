@@ -131,7 +131,7 @@ MonoBehaviour:
   camTrfm: {fileID: 6675375418563153027}
   camPoint: {fileID: 0}
   trauma: 0
-  screenShakeStrength: 0.05
+  screenShakeStrength: 0.002
   shock: 0
 --- !u!114 &4759439923906040170
 MonoBehaviour:

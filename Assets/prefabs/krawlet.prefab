@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 20
   hp: 20
+  screenShake: 7
   trfm: {fileID: 1794393725585258488}
   isHighestParent: 0
   rb: {fileID: 2278440661266250546}

@@ -11,29 +11,26 @@ public class MobileEntity : HPEntity
     protected bool currentFacing;
     protected int doubleJumps, remainingJumps;
     protected const bool leftFace = true, rightFace = false;
-    protected float speed, jumpPower, defaultGravity;
+    protected float maxSpeed, xAccl, jumpPower, defaultGravity;
 
     protected int knockedTmr, noGravityTmr;
 
-    protected bool isOnGround;
+    public bool isOnGround;
 
-    private void Start() { _Start(transform, GetComponent<Rigidbody2D>(), 0, 0, 0, 0); }
-    protected void _Start(Transform pTrfm, Rigidbody2D prb, int entityID, float pSpd, float pJumpPower, int pDoubleJumps = 0)
-    {
-        rb = prb; defaultGravity = rb.gravityScale;
-        trfm = pTrfm;
-        _Start(entityID, pSpd, pJumpPower, pDoubleJumps);
-    }
-    protected void _Start(int entityID, float pSpd, float pJumpPower, int pDoubleJumps = 0)
+    private void Start() { _Start(0, 0, 0, 0); }
+    protected void _Start(int entityID, float pSpd, float accl, float pJumpPower, int pDoubleJumps = 0)
     {
         _Start(entityID);
-        speed = pSpd;
+        xAccl = accl;
+        defaultGravity = rb.gravityScale;
+        maxSpeed = pSpd;
         jumpPower = pJumpPower;
         doubleJumps = pDoubleJumps;
     }
 
-    protected void _FixedUpdate()
+    new protected void _FixedUpdate()
     {
+        base._FixedUpdate();
         if (knockedTmr > 0)
         {
             knockedTmr--;
@@ -50,6 +47,20 @@ public class MobileEntity : HPEntity
     {
         vect2.x = val; vect2.y = rb.velocity.y;
         rb.velocity = vect2;
+    }
+    protected void AddVelX(float val)
+    {
+        if (val > 0 && rb.velocity.x < maxSpeed)
+        {
+            vect2.x += val; vect2.y = rb.velocity.y;
+            if (vect2.x > maxSpeed) vect2.x = maxSpeed;
+            rb.velocity = vect2;
+        } else if (val < 0 && rb.velocity.x > -maxSpeed)
+        {
+            vect2.x += val; vect2.y = rb.velocity.y;
+            if (vect2.x < -maxSpeed) vect2.x = -maxSpeed;
+            rb.velocity = vect2;
+        }
     }
     protected void SetVelY(float val)
     {
@@ -95,7 +106,7 @@ public class MobileEntity : HPEntity
     {
         rb.velocity = Vector2.zero;
     }
-    protected bool IsKnocked()
+    public bool IsKnocked()
     {
         return knockedTmr > 0;
     }
@@ -113,8 +124,10 @@ public class MobileEntity : HPEntity
         strength = (int)(strength * knockbackFactor);
         vect2.x = source.x - trfm.position.x;
         vect2.y = source.y - trfm.position.y;
-        rb.velocity = vect2.normalized * -strength;
-        SetKnocked(strength);
+        vect2.Normalize();
+        vect2.y -= .2f;
+        rb.velocity = vect2 * -strength;
+        SetKnocked((int)(strength*.5f));
     }
 
     protected bool HasGravity()

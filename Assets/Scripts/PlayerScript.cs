@@ -15,12 +15,13 @@ public class PlayerScript : MobileEntity
     Vector3 dashVect;
     int slashTmr, mobilityTmr;
     int basicCD, mobilityCD, superCD, specialCD;
+    public int recoilCD;
 
     Vector3 vect3a, vect3b;
 
     private void Start()
     {
-        _Start(trfm, rb, playerID, spd, jumpPwr, 0);
+        _Start(playerID, spd, 3.6f, jumpPwr, 0);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
         basicKey = KeyCode.U; mobilityKey = KeyCode.Escape; superKey = KeyCode.O; specialKey = KeyCode.P;
     }
@@ -65,7 +66,8 @@ public class PlayerScript : MobileEntity
                 if (!Input.GetKey(rightKey))
                 {
                     FaceDir(leftFace);
-                    SetVelX(-spd);
+                    if (isOnGround) SetVelX(-spd);
+                    else AddVelX(-xAccl);
                 }
             }
             else if (Input.GetKey(rightKey))
@@ -73,7 +75,9 @@ public class PlayerScript : MobileEntity
                 if (!Input.GetKey(leftKey))
                 {
                     FaceDir(rightFace);
-                    SetVelX(spd);
+                    if (isOnGround) SetVelX(spd);
+                    else AddVelX(xAccl);
+
                 }
             } else
             {
@@ -85,6 +89,7 @@ public class PlayerScript : MobileEntity
         if (mobilityCD > 0) mobilityCD--;
         if (superCD > 0) superCD--;
         if (specialCD > 0) specialCD--;
+        if (recoilCD > 0) recoilCD--;
     }
 
     void castBasic()
@@ -94,7 +99,7 @@ public class PlayerScript : MobileEntity
         slashAnim.Play();
         slashCol.enabled = true;
         slashTmr = 8;
-        basicCD = 25;
+        basicCD = 20;
     }
     void castMobiltiy()
     {

@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    [SerializeField] int maxHP, hp;
+    [SerializeField] int maxHP, hp, screenShake;
     [SerializeField] protected Transform trfm;
     [SerializeField] bool isHighestParent;
 
-    protected int entityID;
+    protected int entityID, invulnerable;
     public static int undefinedID = 0, playerID = 1;
 
     private void Start() { _Start(); }
     protected void _Start(int pEntityID = 0) { entityID = pEntityID; hp = maxHP; }
+    protected void _FixedUpdate()
+    {
+        if (invulnerable > 0) invulnerable--;
+    }
     public bool TakeDamage(int amount, int ignoreID = -1) //return true if entity is still alive
     {
-        if (ignoreID == entityID) return true;
+        if (ignoreID == entityID || invulnerable > 0) return true;
+        if (entityID == 1)
+        {
+            Toolbox.camScr.AddTrauma(amount * 80 / maxHP);
+            invulnerable += 50;
+        }
         hp -= amount;
         if (hp <= 0)
         {
@@ -42,6 +51,7 @@ public class HPEntity : MonoBehaviour
 
     void Die()
     {
+        Toolbox.camScr.AddTrauma(screenShake);
         Destroy(trfm.gameObject);
     }
     Transform GetHighestParent(Transform pTrfm)
