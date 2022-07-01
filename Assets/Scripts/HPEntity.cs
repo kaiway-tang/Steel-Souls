@@ -17,9 +17,9 @@ public class HPEntity : MonoBehaviour
     {
         if (invulnerable > 0) invulnerable--;
     }
-    public bool TakeDamage(int amount, int ignoreID = -1) //return true if entity is still alive
+    public bool TakeDamage(int amount, int ignoreID = -1) //return false if entity died OR if attack did not succeed
     {
-        if (ignoreID == entityID || invulnerable > 0) return true;
+        if (ignoreID == entityID || invulnerable > 0) return false;
         if (entityID == 1)
         {
             Toolbox.camScr.AddTrauma(amount * 80 / maxHP);

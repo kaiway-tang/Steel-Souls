@@ -23,7 +23,7 @@ public class PlayerScript : MobileEntity
     {
         _Start(playerID, spd, 3.6f, jumpPwr, 0);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
-        basicKey = KeyCode.U; mobilityKey = KeyCode.Escape; superKey = KeyCode.O; specialKey = KeyCode.P;
+        basicKey = KeyCode.U; mobilityKey = KeyCode.I; superKey = KeyCode.O; specialKey = KeyCode.P;
     }
 
     private void Update()
@@ -94,7 +94,6 @@ public class PlayerScript : MobileEntity
 
     void castBasic()
     {
-        SetKnocked(8);
         slashAnim.trfm.rotation = GetRelativeCardinalDirectionAngle();
         slashAnim.Play();
         slashCol.enabled = true;

@@ -5,7 +5,8 @@ using UnityEngine;
 public class cameraScript : MonoBehaviour
 {
     [SerializeField] Transform camTrfm, camPoint;
-    Transform playerTrfm; Vector3 zOffset = new Vector3(0,0,10), leftRotatedZero = new Vector3(0,0,360), shockRotation = Vector3.zero;
+    [SerializeField] Vector3 offset;
+    Transform playerTrfm; Vector3 leftRotatedZero = new Vector3(0,0,360), shockRotation = Vector3.zero, vect3;
     int mode;
     const int follow = 0;
     void Start()
@@ -14,10 +15,19 @@ public class cameraScript : MonoBehaviour
         camTrfm.parent = null;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) trauma += 10;
+        if (Input.GetKeyDown(KeyCode.Alpha2)) trauma += 20;
+        if (Input.GetKeyDown(KeyCode.Alpha3)) trauma += 30;
+        if (Input.GetKeyDown(KeyCode.Alpha4)) trauma += 40;
+        if (Input.GetKeyDown(KeyCode.Alpha5)) trauma += 50;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (mode == follow) camTrfm.position += (camPoint.position-zOffset - camTrfm.position) * .1f;
+        if (mode == follow) camTrfm.position += (camPoint.position+offset - camTrfm.position) * .1f;
 
         processTrauma();
     }
@@ -54,7 +64,8 @@ public class cameraScript : MonoBehaviour
             shock = Random.Range(-shock, shock);
             shockRotation.z = shock*2;
             camTrfm.localEulerAngles += shockRotation;
-            camTrfm.position += new Vector3(shock, shock = Random.Range(-shock, shock), 0);
+            vect3.x = shock; vect3.y = Random.Range(-shock, shock);
+            camTrfm.position += vect3;
         }
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Toolbox : MonoBehaviour
 {
-    [SerializeField] Transform s_PlayerTrfm, s_emptyTrfm;
-    public static Transform playerTrfm, emptyTrfm;
+    [SerializeField] Transform s_PlayerTrfm, s_camTrfm, s_emptyTrfm;
+    public static Transform playerTrfm, camTrfm, emptyTrfm;
     [SerializeField] PhysicsMaterial2D s_defaultMaterial, s_frictionMaterial;
     public static PhysicsMaterial2D defaultMaterial, frictionMaterial;
     public static cameraScript camScr;
@@ -13,6 +13,7 @@ public class Toolbox : MonoBehaviour
     {
         camScr = GetComponent<cameraScript>();
         emptyTrfm = s_emptyTrfm;
+        camTrfm = s_camTrfm;
         playerTrfm = s_PlayerTrfm;
         defaultMaterial = s_defaultMaterial;
         frictionMaterial = s_frictionMaterial;
