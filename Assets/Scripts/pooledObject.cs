@@ -15,6 +15,11 @@ public class pooledObject : MonoBehaviour
     }
     protected void Repool()
     {
+        if (objID == 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
         objPoolScr.returnObj(objID);
         gameObject.SetActive(false);
     }

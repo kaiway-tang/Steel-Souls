@@ -21,13 +21,7 @@ public class OnHitSpark : pooledObject
         tmr++;
         if (tmr > 5)
         {
-            if (objID == 0)
-            {
-                Destroy(gameObject);
-            } else
-            {
-                Repool();
-            }
+            Repool();
         }
     }
 }

@@ -27,6 +27,7 @@ Player
 
 Foreground:
 	0	: tiles
+	50	: parallax foreground
 
 Effects:
 	100 : fog

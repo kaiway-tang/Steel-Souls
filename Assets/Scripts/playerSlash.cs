@@ -19,7 +19,7 @@ public class playerSlash : attack
         }
         for (int i = 0; i < 3; i++)
         {
-            slashPool.Instantiate(hit.point, sourceTrfm.rotation);
+            slashPool.Instantiate(hit.point.x, hit.point.y, sourceTrfm.rotation);
         }
         _OnTriggerEnter2D(HPScr);
     }

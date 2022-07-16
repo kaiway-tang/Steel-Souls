@@ -10,6 +10,7 @@ public class objectPooler : MonoBehaviour
     GameObject[] objPool;
     Transform[] trfmPool;
     [SerializeField] bool[] inUse;
+    Vector2 position;
     private void Start()
     {
         objPool = new GameObject[count];
@@ -23,10 +24,11 @@ public class objectPooler : MonoBehaviour
         }
     }
 
-    public GameObject Instantiate(Vector2 position, Quaternion rotation, int count = 1)
+    public GameObject Instantiate(float xPos, float yPos, Quaternion rotation, int count = 1)
     {
         for (int i = 0; i < count; i++)
         {
+            position.x = xPos; position.y = yPos;
             while (inUse[index])
             {
                 index++;
