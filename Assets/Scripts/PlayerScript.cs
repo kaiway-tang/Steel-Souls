@@ -66,8 +66,9 @@ public class PlayerScript : MobileEntity
                 if (!Input.GetKey(rightKey))
                 {
                     FaceDir(leftFace);
-                    if (isOnGround) SetVelX(-spd);
-                    else AddVelX(-xAccl);
+                    //if (isOnGround) SetVelX(-spd);
+                    //else AddVelX(-xAccl);
+                    AddVelX(-xAccl);
                 }
             }
             else if (Input.GetKey(rightKey))
@@ -75,8 +76,9 @@ public class PlayerScript : MobileEntity
                 if (!Input.GetKey(leftKey))
                 {
                     FaceDir(rightFace);
-                    if (isOnGround) SetVelX(spd);
-                    else AddVelX(xAccl);
+                    //if (isOnGround) SetVelX(spd);
+                    //else AddVelX(xAccl);
+                    AddVelX(xAccl);
 
                 }
             } else
