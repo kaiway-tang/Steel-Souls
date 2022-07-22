@@ -212,7 +212,7 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.63}
   serializedVersion: 2
   m_Radius: 0.5
 --- !u!1 &5765570014466908660
@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 5317990604650832450}
   - component: {fileID: 5765570014466908662}
   - component: {fileID: 5034395823465323724}
+  - component: {fileID: 8807337096896458319}
   m_Layer: 10
   m_Name: hitbox/sprite
   m_TagString: Untagged
@@ -315,7 +316,7 @@ SpriteRenderer:
   m_SortingLayerID: 1094459901
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 1a10f75703fc8114a8b7597d3e4c3089, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4bd4c2464596cb84cb2ebb475064a207, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -339,9 +340,25 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.63}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &8807337096896458319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765570014466908660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 315481325b331f7468df8403c7744e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 5765570014466908662}
+  sprites:
+  - {fileID: 21300000, guid: 4bd4c2464596cb84cb2ebb475064a207, type: 3}
+  - {fileID: 21300000, guid: 412198568fb316748bf3a3cddafbfc14, type: 3}
 --- !u!1 &7284309489762784593
 GameObject:
   m_ObjectHideFlags: 0

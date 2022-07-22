@@ -6,8 +6,8 @@ public class PlayerScript : MobileEntity
 {
     [SerializeField] bool sameJumpAndUp;
     [SerializeField] float spd, jumpPwr;
-    KeyCode jumpKey, upKey, downKey, leftKey, rightKey;
-    KeyCode basicKey, mobilityKey, superKey, specialKey;
+    public static KeyCode jumpKey, upKey, downKey, leftKey, rightKey;
+    public static KeyCode basicKey, mobilityKey, superKey, specialKey;
 
     [SerializeField] Animator slashAnim;
     [SerializeField] CapsuleCollider2D slashCol;

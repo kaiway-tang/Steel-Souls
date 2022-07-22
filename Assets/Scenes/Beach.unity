@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c5c10e84c146043a45b6ad154e454c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 4
+  count: 8
   obj: {fileID: 1275241632578183475, guid: 6072d3b398938d34791f50b4849462d8, type: 3}
   inUse: 
 --- !u!4 &554897540
