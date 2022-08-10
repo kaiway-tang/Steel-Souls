@@ -237,6 +237,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00847a387874953499354dab5267d65e, type: 3}
+--- !u!114 &182131964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 687131557}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &279650840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -351,6 +362,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00847a387874953499354dab5267d65e, type: 3}
+--- !u!114 &308850842 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 1009198883}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &315831541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -415,6 +437,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 1918942706}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (9)
@@ -529,6 +559,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 1022565065}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 833547779}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (6)
@@ -693,6 +731,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00847a387874953499354dab5267d65e, type: 3}
+--- !u!114 &813452123 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 2015713304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &829784376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -700,6 +749,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 833547779}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 1571233209}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (8)
@@ -807,6 +864,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00847a387874953499354dab5267d65e, type: 3}
+--- !u!114 &833547779 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 1683502035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &901498713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -978,6 +1046,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00847a387874953499354dab5267d65e, type: 3}
+--- !u!114 &938708644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 988799744}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &988799744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -985,6 +1064,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 1076401020}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 1022565065}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (4)
@@ -1042,6 +1129,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 813452123}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 1694008150}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (1)
@@ -1092,6 +1187,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+--- !u!114 &1022565065 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 1727439779}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1076401020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 1398768023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1115469306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1441,6 +1558,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 308850842}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 1076401020}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (2)
@@ -1555,6 +1680,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 1694008150}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 938708644}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (3)
@@ -1605,6 +1738,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+--- !u!114 &1571233209 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 552336949}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1593745343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1714,6 +1858,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 182131964}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 1918942706}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (7)
@@ -1764,6 +1916,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+--- !u!114 &1694008150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 1357992245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1718938822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1828,6 +1991,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 938708644}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[1]
+      value: 
+      objectReference: {fileID: 182131964}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground (5)
@@ -97505,6 +97676,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2088717404098147476, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99337953
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088717404098147476, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.114879355
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857267892990234888, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8013981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3857267892990234888, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.59813136
+      objectReference: {fileID: 0}
     - target: {fileID: 5277710376665800458, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
       propertyPath: m_BackGroundColor.b
       value: 0.039215688
@@ -97516,6 +97703,14 @@ PrefabInstance:
     - target: {fileID: 5277710376665800458, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
       propertyPath: m_BackGroundColor.r
       value: 0.039215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394755530831038311, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.86826974
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394755530831038311, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.49609253
       objectReference: {fileID: 0}
     - target: {fileID: 5765570012926439489, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
       propertyPath: m_Name
@@ -97565,8 +97760,67 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5767038036669225821, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0030539331
+      objectReference: {fileID: 0}
+    - target: {fileID: 5767038036669225821, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9999954
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935632375182833954, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99941343
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935632375182833954, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.034246393
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320181606699254906, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9997849
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320181606699254906, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.020741878
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570859779964757605, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99947315
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570859779964757605, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.03245764
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181392961735037514, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.1219418
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181392961735037514, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.9925373
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461806095152218252, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.19604471
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461806095152218252, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.980595
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6a8217e4490ee46ba586fe9ae8bdec, type: 3}
+--- !u!114 &1918942706 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+  m_PrefabInstance: {fileID: 829784376}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86026463bd2bb1249a1c71db8df9e2e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1964584940
 GameObject:
   m_ObjectHideFlags: 0
@@ -97716,6 +97970,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511147605, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
+      propertyPath: others.Array.data[0]
+      value: 
+      objectReference: {fileID: 308850842}
     - target: {fileID: 7452825562805786521, guid: a2dc2b5d69f8bee40ad589618e52c864, type: 3}
       propertyPath: m_Name
       value: Cave collapsing ground

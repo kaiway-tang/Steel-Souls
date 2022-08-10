@@ -33,7 +33,7 @@ public class HPEntity : MonoBehaviour
         }
         return true;
     }
-    public virtual void knockback(Vector2 source, int strength, int ignoreID = -1) { }
+    public virtual void knockback(float x, float y, int strength, int ignoreID = -1) { }
     public Vector3 GetPos()
     {
         return trfm.position;

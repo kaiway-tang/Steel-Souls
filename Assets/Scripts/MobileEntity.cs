@@ -118,12 +118,12 @@ public class MobileEntity : HPEntity
             rb.sharedMaterial = Toolbox.frictionMaterial;
         }
     }
-    public override void knockback(Vector2 source, int strength, int ignoreID = -1)
+    public override void knockback(float x, float y, int strength, int ignoreID = -1)
     {
         if (entityID == ignoreID) return;
         strength = (int)(strength * knockbackFactor);
-        vect2.x = source.x - trfm.position.x;
-        vect2.y = source.y - trfm.position.y;
+        vect2.x = x - trfm.position.x;
+        vect2.y = y - trfm.position.y;
         vect2.Normalize();
         vect2.y -= .2f;
         rb.velocity = vect2 * -strength;

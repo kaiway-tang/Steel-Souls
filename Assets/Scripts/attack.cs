@@ -31,7 +31,7 @@ public class attack : MonoBehaviour
     {
         if (pHPScr.TakeDamage(damage, entityID))
         {
-            pHPScr.knockback(sourceTrfm.position, knockback, entityID);
+            pHPScr.knockback(sourceTrfm.position.x, sourceTrfm.position.y, knockback, entityID);
         }
     }
 }

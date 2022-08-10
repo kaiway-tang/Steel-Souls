@@ -35,7 +35,7 @@ public class objectPooler : MonoBehaviour
                 if (index == inUse.Length) index = 0;
                 if (index == end)
                 {
-                    Debug.Log("we out");
+                    Debug.Log(obj + " supply exhausted");
                     return Instantiate(obj, position, rotation);
                 }
             }

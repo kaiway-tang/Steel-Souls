@@ -9,7 +9,9 @@ public class PlayerScript : MobileEntity
     public static KeyCode jumpKey, upKey, downKey, leftKey, rightKey;
     public static KeyCode basicKey, mobilityKey, superKey, specialKey;
 
-    [SerializeField] Animator slashAnim;
+    [SerializeField] ManualAnimator slashAnim;
+    [SerializeField] Animator playerAnimator;
+    const int idle = 0, walking = 1;
     [SerializeField] CapsuleCollider2D slashCol;
     [SerializeField] ParticleSystem dashPtclSys;
     Vector3 dashVect;
@@ -29,8 +31,16 @@ public class PlayerScript : MobileEntity
     private void Update()
     {
         if (Input.GetKeyDown(jumpKey) || (Input.GetKeyDown(upKey) && sameJumpAndUp)) Jump();
-        if (Input.GetKeyDown(leftKey) && !IsKnocked()) FaceDir(leftFace);
-        if (Input.GetKeyDown(rightKey) && !IsKnocked()) FaceDir(rightFace);
+        if (Input.GetKeyDown(leftKey) && !IsKnocked())
+        {
+            FaceDir(leftFace);
+            SetAnimation(walking);
+        }
+        if (Input.GetKeyDown(rightKey) && !IsKnocked())
+        {
+            FaceDir(rightFace);
+            SetAnimation(walking);
+        }    
     }
     private void FixedUpdate()
     {
@@ -59,7 +69,7 @@ public class PlayerScript : MobileEntity
 
         if (!IsKnocked())
         {
-            if (Input.GetKey(mobilityKey) && mobilityCD < 1) castMobiltiy();
+            if (Input.GetKey(mobilityKey) && mobilityCD < 1) castMobility();
 
             if (Input.GetKey(leftKey))
             {
@@ -84,6 +94,7 @@ public class PlayerScript : MobileEntity
             } else
             {
                 SetVelX(0);
+                SetAnimation(idle);
             }
         }
 
@@ -102,7 +113,7 @@ public class PlayerScript : MobileEntity
         slashTmr = 8;
         basicCD = 20;
     }
-    void castMobiltiy()
+    void castMobility()
     {
         SetKnocked(7);
         setNoGravity(7);
@@ -219,5 +230,8 @@ public class PlayerScript : MobileEntity
         if (neg90) return Quaternion.Euler(0, 0, -90 - GetCardinalDirection() * 45);
         return Quaternion.Euler(0, 0, 90 - GetCardinalDirection() * 45);
     }
-
+    private void SetAnimation(int state)
+    {
+        playerAnimator.SetInteger("state", state);
+    }
 }
