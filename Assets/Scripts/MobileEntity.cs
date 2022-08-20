@@ -9,7 +9,7 @@ public class MobileEntity : HPEntity
     Vector2 vect2; Vector3 vect3;
 
     protected bool currentFacing;
-    protected int doubleJumps, remainingJumps;
+    protected int doubleJumps, remainingJumps, lockFacing;
     protected const bool leftFace = true, rightFace = false;
     protected float maxSpeed, xAccl, jumpPower, defaultGravity;
 
@@ -69,7 +69,7 @@ public class MobileEntity : HPEntity
     }
     protected void FaceDir(bool direction)
     {
-        if (currentFacing == direction) return;
+        if (currentFacing == direction || lockFacing > 0) return;
         if (direction == leftFace)
         {
             if (trfm.localScale.x > 0) vect3.x = -trfm.localScale.x;
@@ -100,6 +100,10 @@ public class MobileEntity : HPEntity
                 remainingJumps--;
             }
         }
+    }
+    protected void PseudoJump(float power)
+    {
+        SetVelY(power);
     }
 
     protected void ZeroVelocity()

@@ -7,36 +7,40 @@ public class PlayerScript : MobileEntity
     [SerializeField] bool sameJumpAndUp;
     [SerializeField] float spd, jumpPwr;
     public static KeyCode jumpKey, upKey, downKey, leftKey, rightKey;
-    public static KeyCode basicKey, mobilityKey, superKey, specialKey;
+    public static KeyCode basicKey, mobilityKey, ultimateKey, specialKey;
 
     [SerializeField] ManualAnimator slashAnim;
     [SerializeField] Animator playerAnimator;
-    const int idle = 0, walking = 1;
-    [SerializeField] CapsuleCollider2D slashCol;
+    int defaultState, overrideState;
+    const int idle = 0, walking = 1, basicSlash = 2, ultSlash = 3, dash = 4, jump = 5;
+    [SerializeField] Collider2D slashCol, ultCol;
     [SerializeField] ParticleSystem dashPtclSys;
+    [SerializeField] circleSlashAnimation ultimateAnimScr;
     Vector3 dashVect;
-    int slashTmr, mobilityTmr;
-    int basicCD, mobilityCD, superCD, specialCD;
+    int slashTmr, mobilityTmr, ultTmr;
+    int basicCD, mobilityCD, ultimateCD, specialCD;
     public int recoilCD;
+    bool groundedCheck;
 
     Vector3 vect3a, vect3b;
 
     private void Start()
     {
+        //Time.timeScale = .1f;
         _Start(playerID, spd, 3.6f, jumpPwr, 0);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
-        basicKey = KeyCode.U; mobilityKey = KeyCode.I; superKey = KeyCode.O; specialKey = KeyCode.P;
+        basicKey = KeyCode.U; mobilityKey = KeyCode.I; ultimateKey = KeyCode.O; specialKey = KeyCode.P;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(jumpKey) || (Input.GetKeyDown(upKey) && sameJumpAndUp)) Jump();
-        if (Input.GetKeyDown(leftKey) && !IsKnocked())
+        if (Input.GetKeyDown(leftKey) && !Input.GetKey(rightKey) && !IsKnocked())
         {
             FaceDir(leftFace);
             SetAnimation(walking);
         }
-        if (Input.GetKeyDown(rightKey) && !IsKnocked())
+        if (Input.GetKeyDown(rightKey) && !Input.GetKey(leftKey) && !IsKnocked())
         {
             FaceDir(rightFace);
             SetAnimation(walking);
@@ -46,6 +50,18 @@ public class PlayerScript : MobileEntity
     {
         _FixedUpdate();
 
+        if (groundedCheck != isOnGround)
+        {
+            groundedCheck = isOnGround;
+            if (!isOnGround)
+            {
+                OverrideAnimation(jump);
+            } else
+            {
+                ResumeAnimation();
+            }
+        }
+
         if (mobilityTmr > 0)
         {
             mobilityTmr--;
@@ -53,6 +69,7 @@ public class PlayerScript : MobileEntity
             if (mobilityTmr == 0)
             {
                 ZeroVelocity();
+                ResumeAnimation();
                 dashPtclSys.Stop();
             }
         }
@@ -61,11 +78,24 @@ public class PlayerScript : MobileEntity
             slashTmr--;
             if (slashTmr < 1)
             {
+                lockFacing--;
+                ResumeAnimation();
                 slashCol.enabled = false;
             }
         }
+        if (ultTmr > 0)
+        {
+            ultTmr--;
+            if (ultTmr < 1)
+            {
+                lockFacing--;
+                ResumeAnimation();
+                ultCol.enabled = false;
+            }
+        }
 
-            if (Input.GetKey(basicKey) && basicCD < 1) castBasic();
+        if (Input.GetKey(basicKey) && basicCD < 1) castBasic();
+        if (Input.GetKey(ultimateKey)) castUltimate();
 
         if (!IsKnocked())
         {
@@ -76,6 +106,7 @@ public class PlayerScript : MobileEntity
                 if (!Input.GetKey(rightKey))
                 {
                     FaceDir(leftFace);
+                    SetAnimation(walking);
                     //if (isOnGround) SetVelX(-spd);
                     //else AddVelX(-xAccl);
                     AddVelX(-xAccl);
@@ -86,6 +117,7 @@ public class PlayerScript : MobileEntity
                 if (!Input.GetKey(leftKey))
                 {
                     FaceDir(rightFace);
+                    SetAnimation(walking);
                     //if (isOnGround) SetVelX(spd);
                     //else AddVelX(xAccl);
                     AddVelX(xAccl);
@@ -100,18 +132,21 @@ public class PlayerScript : MobileEntity
 
         if (basicCD > 0) basicCD--;
         if (mobilityCD > 0) mobilityCD--;
-        if (superCD > 0) superCD--;
+        if (ultimateCD > 0) ultimateCD--;
         if (specialCD > 0) specialCD--;
         if (recoilCD > 0) recoilCD--;
     }
 
     void castBasic()
     {
+        if (slashTmr > 0) return;
         slashAnim.trfm.rotation = GetRelativeCardinalDirectionAngle();
         slashAnim.Play();
         slashCol.enabled = true;
         slashTmr = 8;
         basicCD = 20;
+        lockFacing++;
+        OverrideAnimation(basicSlash);
     }
     void castMobility()
     {
@@ -122,6 +157,17 @@ public class PlayerScript : MobileEntity
         mobilityTmr = 7;
         mobilityCD = 40;
         dashPtclSys.Play();
+        OverrideAnimation(dash);
+    }
+    void castUltimate()
+    {
+        if (ultTmr > 0) return;
+        PseudoJump(15);
+        ultTmr = 15;
+        ultimateAnimScr.play();
+        ultCol.enabled = true;
+        lockFacing++;
+        OverrideAnimation(ultSlash);
     }
 
     int lastCardinalDir;
@@ -230,8 +276,27 @@ public class PlayerScript : MobileEntity
         if (neg90) return Quaternion.Euler(0, 0, -90 - GetCardinalDirection() * 45);
         return Quaternion.Euler(0, 0, 90 - GetCardinalDirection() * 45);
     }
-    private void SetAnimation(int state)
+    private void OverrideAnimation(int state)
     {
+        overrideState = state;
         playerAnimator.SetInteger("state", state);
+        playerAnimator.SetBool("lock", true);
+    }
+    private bool SetAnimation(int state)
+    {
+        if (state == defaultState) return true;
+        if (overrideState == 0)
+        {
+            defaultState = state;
+            playerAnimator.SetInteger("state", state);
+            return true;
+        }
+        return false;
+    }
+    private void ResumeAnimation()
+    {
+        overrideState = 0;
+        playerAnimator.SetInteger("state", defaultState);
+        playerAnimator.SetBool("lock", false);
     }
 }

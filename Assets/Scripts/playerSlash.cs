@@ -6,6 +6,7 @@ public class playerSlash : attack
 {
     [SerializeField] objectPooler slashPool;
     [SerializeField] PlayerScript plyrScr;
+    [SerializeField] int recoil;
     static int layerMask = 1 << 9;
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -14,7 +15,7 @@ public class playerSlash : attack
         RaycastHit2D hit = Physics2D.Raycast(sourceTrfm.position, HPScr.GetPos()-sourceTrfm.position, 99, layerMask);
         if (!plyrScr.isOnGround && plyrScr.recoilCD < 1)
         {
-            plyrScr.knockback(hit.point.x, hit.point.y-1, 9);
+            plyrScr.knockback(hit.point.x, hit.point.y-1, recoil);
             plyrScr.recoilCD = 5;
         }
         for (int i = 0; i < 3; i++)
