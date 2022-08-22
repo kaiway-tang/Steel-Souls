@@ -13,9 +13,9 @@ public class playerSlash : attack
         HPEntity HPScr = GetHPScr(col);
         if (HPScr.getEntityID() == 1) return;
         RaycastHit2D hit = Physics2D.Raycast(sourceTrfm.position, HPScr.GetPos()-sourceTrfm.position, 99, layerMask);
-        if (!plyrScr.isOnGround && plyrScr.recoilCD < 1)
+        if (!plyrScr.isOnGround && plyrScr.recoilCD < 1 && recoil > 0)
         {
-            plyrScr.knockback(hit.point.x, hit.point.y-1, recoil);
+            plyrScr.Recoil(recoil);
             plyrScr.recoilCD = 5;
         }
         for (int i = 0; i < 3; i++)

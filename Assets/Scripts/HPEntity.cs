@@ -38,6 +38,8 @@ public class HPEntity : MonoBehaviour
     {
         return trfm.position;
     }
+    public float GetPosX() { return trfm.position.x; }
+    public float GetPosY() { return trfm.position.y; }
     public bool Heal(int amount) //return true if entity is now full hp
     {
         hp += amount;

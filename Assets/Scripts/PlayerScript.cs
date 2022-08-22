@@ -140,7 +140,7 @@ public class PlayerScript : MobileEntity
     void castBasic()
     {
         if (slashTmr > 0) return;
-        slashAnim.trfm.rotation = GetRelativeCardinalDirectionAngle();
+        slashAnim.trfm.rotation = GetRelativeAimDirectionAngle();
         slashAnim.Play();
         slashCol.enabled = true;
         slashTmr = 8;
@@ -152,7 +152,7 @@ public class PlayerScript : MobileEntity
     {
         SetKnocked(7);
         setNoGravity(7);
-        dashVect = GetCardinalDirectionVector() * 30;
+        dashVect = GetAimDirectionVector() * 30;
         rb.velocity = dashVect;
         mobilityTmr = 7;
         mobilityCD = 40;
@@ -170,64 +170,85 @@ public class PlayerScript : MobileEntity
         OverrideAnimation(ultSlash);
     }
 
-    int lastCardinalDir;
-    const int cardinalN = 0, cardinalNE = 1, cardinalE = 2, cardinalSE = 3, cardinalS = 4, cardinalSW = 5, cardinalW = 6, cardinalNW = 7;
-    private int GetCardinalDirection()
+
+
+
+    public void Recoil(int strength)
+    {
+        switch (GetAimDirection())
+        {
+            case aimW:
+                knockback(0,1,strength);
+                break;
+            default:
+                break;
+        }
+    }
+
+
+
+
+
+
+
+    int lastAim;
+    const int aimW = 0, aimWD = 1, aimD = 2, aimSD = 3, aimS = 4, aimSA = 5, aimA = 6, aimWA = 7;
+    private int GetAimDirection()
     {
         if (Input.GetKey(upKey) && !Input.GetKey(downKey))
         {
             if (Input.GetKey(rightKey) && !Input.GetKey(leftKey))
             {
-                lastCardinalDir = cardinalNE;
+                lastAim = aimWD;
             } else if (Input.GetKey(leftKey) && !Input.GetKey(rightKey))
             {
-                lastCardinalDir = cardinalNW;
+                lastAim = aimWA;
             } else
             {
-                lastCardinalDir = cardinalN;
+                lastAim = aimW;
             }
         } else if (Input.GetKey(downKey) && !Input.GetKey(upKey))
         {
             if (Input.GetKey(rightKey) && !Input.GetKey(leftKey))
             {
-                lastCardinalDir = cardinalSE;
+                lastAim = aimSD;
             }
             else if (Input.GetKey(leftKey) && !Input.GetKey(rightKey))
             {
-                lastCardinalDir = cardinalSW;
+                lastAim = aimSA;
             } else
             {
-                lastCardinalDir = cardinalS;
+                lastAim = aimS;
             }
         } else
         {
             if (Input.GetKey(rightKey) && !Input.GetKey(leftKey))
             {
-                lastCardinalDir = cardinalE;
+                lastAim = aimD;
             }
             else if (Input.GetKey(leftKey) && !Input.GetKey(rightKey))
             {
-                lastCardinalDir = cardinalW;
+                lastAim = aimA;
             }
             else
             {
                 //either no keys or all keys held;
                 if (currentFacing == leftFace)
                 {
-                    lastCardinalDir = cardinalW;
+                    lastAim = aimA;
                 } else
                 {
-                    lastCardinalDir = cardinalE;
+                    lastAim = aimD;
                 }
             }
         }
 
-        return lastCardinalDir;
-    } //returns a cardinal direction based on directional input
-    private Vector3 GetCardinalDirectionVector() //also sets lastCardinalDirection
+        return lastAim;
+    } //returns a Aim direction based on directional input
+    private Vector3 GetAimDirectionVector() //also sets lastAim
     {
         vect3a.z = 0;
-        switch (GetCardinalDirection())
+        switch (GetAimDirection())
         {
             case 0:
                 vect3a.x = 0;
@@ -264,17 +285,17 @@ public class PlayerScript : MobileEntity
         }
         return vect3a;
     }
-    private Quaternion GetCardinalRawDirectionAngle() //also sets lastCardinalDirection, also probs doesnt work
+    private Quaternion GetAimRawDirectionAngle() //also sets lastAim, also probs doesnt work
     {
-        return Quaternion.Euler(0, 0, 90 - 45 * GetCardinalDirection());
+        return Quaternion.Euler(0, 0, 90 - 45 * GetAimDirection());
     }
-    private Quaternion GetRelativeCardinalDirectionAngle() //takes into account reflecting of player sprite
+    private Quaternion GetRelativeAimDirectionAngle() //takes into account reflecting of player sprite
     {
         bool neg90 = false;
-        if (GetCardinalDirection() > 4 || (lastCardinalDir % 4 == 0 && currentFacing == leftFace)) neg90 = true;
+        if (GetAimDirection() > 4 || (lastAim % 4 == 0 && currentFacing == leftFace)) neg90 = true;
 
-        if (neg90) return Quaternion.Euler(0, 0, -90 - GetCardinalDirection() * 45);
-        return Quaternion.Euler(0, 0, 90 - GetCardinalDirection() * 45);
+        if (neg90) return Quaternion.Euler(0, 0, -90 - GetAimDirection() * 45);
+        return Quaternion.Euler(0, 0, 90 - GetAimDirection() * 45);
     }
     private void OverrideAnimation(int state)
     {
