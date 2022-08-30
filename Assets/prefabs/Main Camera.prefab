@@ -40,9 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6675375418563153027}
   - component: {fileID: 6675375418563153020}
+  - component: {fileID: 4759439923906040170}
   - component: {fileID: 6675375418563153022}
   - component: {fileID: 6675375418563153026}
-  - component: {fileID: 4759439923906040170}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -109,6 +109,23 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &4759439923906040170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675375418563153023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f908810e47730245b335c1e3ace6bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  s_PlayerTrfm: {fileID: 0}
+  s_camTrfm: {fileID: 6675375418563153027}
+  s_emptyTrfm: {fileID: 6653751776648433131}
+  s_defaultMaterial: {fileID: 6200000, guid: dca96cd0129f4a54e9c14e8189ad4b4d, type: 2}
+  s_frictionMaterial: {fileID: 6200000, guid: ba04d171f43fee64199574e2568c36c0, type: 2}
 --- !u!81 &6675375418563153022
 AudioListener:
   m_ObjectHideFlags: 0
@@ -132,26 +149,11 @@ MonoBehaviour:
   camTrfm: {fileID: 6675375418563153027}
   camPoint: {fileID: 0}
   offset: {x: 0, y: 0, z: -10}
+  mode: 0
   trauma: 0
   screenShakeStrength: 0.002
   shock: 0
---- !u!114 &4759439923906040170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6675375418563153023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f908810e47730245b335c1e3ace6bcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  s_PlayerTrfm: {fileID: 0}
-  s_camTrfm: {fileID: 6675375418563153027}
-  s_emptyTrfm: {fileID: 6653751776648433131}
-  s_defaultMaterial: {fileID: 6200000, guid: dca96cd0129f4a54e9c14e8189ad4b4d, type: 2}
-  s_frictionMaterial: {fileID: 6200000, guid: ba04d171f43fee64199574e2568c36c0, type: 2}
+  constraints: []
 --- !u!1 &7264699149572576905
 GameObject:
   m_ObjectHideFlags: 0

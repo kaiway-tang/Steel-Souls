@@ -7,8 +7,10 @@ public class cameraScript : MonoBehaviour
     [SerializeField] Transform camTrfm, camPoint;
     [SerializeField] Vector3 offset;
     Transform playerTrfm; Vector3 leftRotatedZero = new Vector3(0,0,360), shockRotation = Vector3.zero, vect3;
-    int mode;
-    const int follow = 0;
+    [SerializeField] int mode;
+    const int follow = 0, followX = 1;
+    Vector3 move, reverse;
+    int index;
     void Start()
     {
         playerTrfm = Toolbox.playerTrfm;
@@ -27,7 +29,20 @@ public class cameraScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (mode == follow) camTrfm.position += (camPoint.position+offset - camTrfm.position) * .1f;
+        if (mode == follow)
+        {
+            move = (camPoint.position + offset - camTrfm.position) * .1f;
+            camTrfm.position += move;
+            processConstraints();
+        }
+        else
+        if (mode == followX)
+        {
+            move.x = (camPoint.position.x + offset.x - camTrfm.position.x) * .1f;
+            move.y = 0;
+            camTrfm.position += move;
+            processConstraints();
+        }
 
         processTrauma();
     }
@@ -66,6 +81,17 @@ public class cameraScript : MonoBehaviour
             camTrfm.localEulerAngles += shockRotation;
             vect3.x = shock; vect3.y = Random.Range(-shock, shock);
             camTrfm.position += vect3;
+        }
+    }
+
+    [SerializeField] DoubleVector2[] constraints;
+    void processConstraints()
+    {
+        for (index = 0; index < constraints.Length; index++)
+        {
+            if (camTrfm.position.x < constraints[index].max.x && camTrfm.position.x > constraints[index].min.x) reverse.x = move.x; else reverse.x = 0;
+            if (camTrfm.position.y < constraints[index].min.y && camTrfm.position.y > constraints[index].min.y) reverse.y = move.y; else reverse.y = 0;
+            camTrfm.position -= reverse;
         }
     }
 }

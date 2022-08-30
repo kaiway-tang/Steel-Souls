@@ -12,7 +12,13 @@ public class PlayerScript : MobileEntity
     [SerializeField] ManualAnimator slashAnim;
     [SerializeField] Animator playerAnimator;
     int defaultState, overrideState;
+    int[] animPriorities = {0, 10, 100, 190, 130, 20 }, animQue = new int[5];
     const int idle = 0, walking = 1, basicSlash = 2, ultSlash = 3, dash = 4, jump = 5;
+    int currentAnim;
+
+    int walkState;
+    const int walkStopped = 0, walkRight = 1, walkLeft = 2;
+
     [SerializeField] Collider2D slashCol, ultCol;
     [SerializeField] ParticleSystem dashPtclSys;
     [SerializeField] circleSlashAnimation ultimateAnimScr;
@@ -30,6 +36,8 @@ public class PlayerScript : MobileEntity
         _Start(playerID, spd, 3.6f, jumpPwr, 0);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
         basicKey = KeyCode.U; mobilityKey = KeyCode.I; ultimateKey = KeyCode.O; specialKey = KeyCode.P;
+
+        SetAnimation(idle);
     }
 
     private void Update()
@@ -38,12 +46,12 @@ public class PlayerScript : MobileEntity
         if (Input.GetKeyDown(leftKey) && !Input.GetKey(rightKey) && !IsKnocked())
         {
             FaceDir(leftFace);
-            SetAnimation(walking);
+            QueAnimation(walking);
         }
         if (Input.GetKeyDown(rightKey) && !Input.GetKey(leftKey) && !IsKnocked())
         {
             FaceDir(rightFace);
-            SetAnimation(walking);
+            QueAnimation(walking);
         }    
     }
     private void FixedUpdate()
@@ -55,10 +63,10 @@ public class PlayerScript : MobileEntity
             groundedCheck = isOnGround;
             if (!isOnGround)
             {
-                OverrideAnimation(jump);
+                QueAnimation(jump);
             } else
             {
-                ResumeAnimation();
+                DequeAnimation(jump);
             }
         }
 
@@ -69,7 +77,7 @@ public class PlayerScript : MobileEntity
             if (mobilityTmr == 0)
             {
                 ZeroVelocity();
-                ResumeAnimation();
+                DequeAnimation(dash);
                 dashPtclSys.Stop();
             }
         }
@@ -79,7 +87,7 @@ public class PlayerScript : MobileEntity
             if (slashTmr < 1)
             {
                 lockFacing--;
-                ResumeAnimation();
+                DequeAnimation(basicSlash);
                 slashCol.enabled = false;
             }
         }
@@ -89,44 +97,57 @@ public class PlayerScript : MobileEntity
             if (ultTmr < 1)
             {
                 lockFacing--;
-                ResumeAnimation();
+                DequeAnimation(ultSlash);
                 ultCol.enabled = false;
             }
         }
 
         if (Input.GetKey(basicKey) && basicCD < 1) castBasic();
-        if (Input.GetKey(ultimateKey)) castUltimate();
+        if (Input.GetKey(ultimateKey) && ultimateCD < 1) castUltimate();
 
         if (!IsKnocked())
         {
             if (Input.GetKey(mobilityKey) && mobilityCD < 1) castMobility();
 
-            if (Input.GetKey(leftKey))
-            {
-                if (!Input.GetKey(rightKey))
-                {
-                    FaceDir(leftFace);
-                    SetAnimation(walking);
-                    //if (isOnGround) SetVelX(-spd);
-                    //else AddVelX(-xAccl);
-                    AddVelX(-xAccl);
-                }
-            }
-            else if (Input.GetKey(rightKey))
-            {
-                if (!Input.GetKey(leftKey))
-                {
-                    FaceDir(rightFace);
-                    SetAnimation(walking);
-                    //if (isOnGround) SetVelX(spd);
-                    //else AddVelX(xAccl);
-                    AddVelX(xAccl);
 
+            if (walkState == 0)
+            {
+                if (Input.GetKey(leftKey))
+                {
+                    if (!Input.GetKey(rightKey)) doWalkLeft();
+                }
+                else if (Input.GetKey(rightKey))
+                {
+                    doWalkRight();
                 }
             } else
             {
-                SetVelX(0);
-                SetAnimation(idle);
+                if (Input.GetKey(leftKey))
+                {
+                    if (Input.GetKey(rightKey)) //both left and right
+                    {
+                        doWalkStopped();
+                    } else //just left
+                    {
+                        if (walkState == walkRight) doWalkLeft();
+                        else
+                        {
+                            AddVelX(-xAccl);
+                            FaceDir(leftFace);
+                        }
+                    }
+                } else if (Input.GetKey(rightKey)) //just right
+                {
+                    if (walkState == walkLeft) doWalkRight();
+                    else
+                    {
+                        AddVelX(xAccl);
+                        FaceDir(rightFace);
+                    }
+                } else //neither left nor right
+                {
+                    doWalkStopped();
+                }
             }
         }
 
@@ -135,6 +156,31 @@ public class PlayerScript : MobileEntity
         if (ultimateCD > 0) ultimateCD--;
         if (specialCD > 0) specialCD--;
         if (recoilCD > 0) recoilCD--;
+    }
+
+    void doWalkRight()
+    {
+        FaceDir(rightFace);
+        QueAnimation(walking);
+        //if (isOnGround) SetVelX(spd);
+        //else AddVelX(xAccl);
+        AddVelX(xAccl);
+        walkState = walkRight;
+    }
+    void doWalkLeft()
+    {
+        FaceDir(leftFace);
+        QueAnimation(walking);
+        //if (isOnGround) SetVelX(spd);
+        //else AddVelX(xAccl);
+        AddVelX(-xAccl);
+        walkState = walkLeft;
+    }
+    void doWalkStopped()
+    {
+        walkState = walkStopped;
+        SetVelX(0);
+        DequeAnimation(walking);
     }
 
     void castBasic()
@@ -146,7 +192,7 @@ public class PlayerScript : MobileEntity
         slashTmr = 8;
         basicCD = 20;
         lockFacing++;
-        OverrideAnimation(basicSlash);
+        QueAnimation(basicSlash);
     }
     void castMobility()
     {
@@ -157,17 +203,18 @@ public class PlayerScript : MobileEntity
         mobilityTmr = 7;
         mobilityCD = 40;
         dashPtclSys.Play();
-        OverrideAnimation(dash);
+        QueAnimation(dash);
     }
     void castUltimate()
     {
         if (ultTmr > 0) return;
         PseudoJump(15);
         ultTmr = 15;
+        ultimateCD = 400;
         ultimateAnimScr.play();
         ultCol.enabled = true;
         lockFacing++;
-        OverrideAnimation(ultSlash);
+        QueAnimation(ultSlash);
     }
 
 
@@ -297,27 +344,56 @@ public class PlayerScript : MobileEntity
         if (neg90) return Quaternion.Euler(0, 0, -90 - GetAimDirection() * 45);
         return Quaternion.Euler(0, 0, 90 - GetAimDirection() * 45);
     }
-    private void OverrideAnimation(int state)
+
+    private void SetAnimation(int state)
     {
-        overrideState = state;
+        currentAnim = state;
         playerAnimator.SetInteger("state", state);
-        playerAnimator.SetBool("lock", true);
     }
-    private bool SetAnimation(int state)
+    private bool QueAnimation(int state)
     {
-        if (state == defaultState) return true;
-        if (overrideState == 0)
+        int i;
+        for (i = 0; i < animQue.Length; i++)
+            if (animQue[i] == state) return false;
+
+        for (i = 0; i < animQue.Length; i++)
         {
-            defaultState = state;
-            playerAnimator.SetInteger("state", state);
-            return true;
+            if (animQue[i] == 0)
+            {
+                animQue[i] = state;
+                break;
+            }
         }
-        return false;
+
+        if (animPriorities[state] > animPriorities[currentAnim]) SetAnimation(state);
+        return true;
     }
-    private void ResumeAnimation()
+    private bool DequeAnimation(int state)
     {
-        overrideState = 0;
-        playerAnimator.SetInteger("state", defaultState);
-        playerAnimator.SetBool("lock", false);
+        bool dequed = false;
+        for (int i = 0; i < animQue.Length; i++)
+        {
+            if (animQue[i] == state)
+            {
+                animQue[i] = 0;
+                dequed = true;
+                break;
+            }
+        }
+        if (!dequed) return false;
+
+        if (state == currentAnim)
+        {
+            int maxPriority = animQue[0];
+            for (int i = 1; i < animQue.Length; i++)
+            {
+                if (animPriorities[animQue[i]] > animPriorities[maxPriority])
+                {
+                    maxPriority = animQue[i];
+                }
+            }
+            SetAnimation(maxPriority);
+        }
+        return true;
     }
 }
