@@ -7,12 +7,18 @@ public class parallax : MonoBehaviour
     [SerializeField] Transform[] backgrounds;
     [SerializeField] Vector2[] ratios;
     [SerializeField] float rate;
-    Vector2 initPos, setPos;
+    Vector2 camInitPos, setPos;
+    Vector2[] initPos;
     Transform camTrfm;
     void Start()
     {
         camTrfm = Toolbox.camTrfm;
-        initPos = camTrfm.position;
+        camInitPos = camTrfm.position;
+        initPos = new Vector2[backgrounds.Length];
+        for (int i = 0; i < backgrounds.Length; i++)
+        {
+            initPos[i] = backgrounds[i].position;
+        }
     }
 
     // Update is called once per frame
@@ -20,8 +26,8 @@ public class parallax : MonoBehaviour
     {
         for (int i = 0; i < backgrounds.Length; i++)
         {
-            setPos.x = camTrfm.position.x + ratios[i].x * (initPos.x - camTrfm.position.x) * rate;
-            setPos.y = camTrfm.position.y + ratios[i].y * (initPos.y - camTrfm.position.y) * rate;
+            setPos.x = initPos[i].x + ratios[i].x * (camTrfm.position.x - camInitPos.x) * rate;
+            setPos.y = initPos[i].y + ratios[i].y * (camTrfm.position.y - camInitPos.y) * rate;
             backgrounds[i].position = setPos;
         }
     }
