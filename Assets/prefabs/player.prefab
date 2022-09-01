@@ -5889,7 +5889,7 @@ MonoBehaviour:
   isOnGround: 0
   sameJumpAndUp: 0
   spd: 9
-  jumpPwr: 23
+  jumpPwr: 24
   slashAnim: {fileID: 1915926054236966074}
   playerAnimator: {fileID: 5932368130285967874}
   slashCol: {fileID: 4089410118452266604}

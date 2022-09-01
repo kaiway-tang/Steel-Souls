@@ -12,9 +12,9 @@ public class PlayerScript : MobileEntity
     [SerializeField] ManualAnimator slashAnim;
     [SerializeField] Animator playerAnimator;
     int defaultState, overrideState;
-    int[] animPriorities = {0, 10, 100, 190, 130, 20 }, animQue = new int[5];
-    const int idle = 0, walking = 1, basicSlash = 2, ultSlash = 3, dash = 4, jump = 5;
-    int currentAnim;
+    int[] animPriorities = {0, 10, 100, 190, 130, 20, 25}, animQue = new int[5];
+    const int idle = 0, walking = 1, basicSlash = 2, ultSlash = 3, dash = 4, jump = 5, djump = 6;
+    int currentAnim, djumpDeque;
 
     int walkState;
     const int walkStopped = 0, walkRight = 1, walkLeft = 2;
@@ -33,7 +33,7 @@ public class PlayerScript : MobileEntity
     private void Start()
     {
         //Time.timeScale = .1f;
-        _Start(playerID, spd, 3.6f, jumpPwr, 0);
+        _Start(playerID, spd, 3.6f, jumpPwr, 1);
         jumpKey = KeyCode.Space; upKey = KeyCode.W; downKey = KeyCode.S; leftKey = KeyCode.A; rightKey = KeyCode.D;
         basicKey = KeyCode.U; mobilityKey = KeyCode.I; ultimateKey = KeyCode.O; specialKey = KeyCode.P;
 
@@ -42,8 +42,16 @@ public class PlayerScript : MobileEntity
 
     private void Update()
     {
-        if (Input.GetKeyDown(jumpKey) || (Input.GetKeyDown(upKey) && sameJumpAndUp)) Jump();
-        if (Input.GetKeyDown(leftKey) && !Input.GetKey(rightKey) && !IsKnocked())
+        if (Input.GetKeyDown(jumpKey) || (Input.GetKeyDown(upKey) && sameJumpAndUp))
+        {
+            Jump();
+            if (remainingJumps == 0)
+            {
+                QueAnimation(djump);
+                djumpDeque = 2;
+            }
+        }
+            if (Input.GetKeyDown(leftKey) && !Input.GetKey(rightKey) && !IsKnocked())
         {
             FaceDir(leftFace);
             QueAnimation(walking);
@@ -67,7 +75,13 @@ public class PlayerScript : MobileEntity
             } else
             {
                 DequeAnimation(jump);
+
             }
+        }
+        if (djumpDeque > 0)
+        {
+            djumpDeque--;
+            if (djumpDeque == 0) DequeAnimation(djump);
         }
 
         if (mobilityTmr > 0)
