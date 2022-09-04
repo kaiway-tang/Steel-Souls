@@ -16,7 +16,7 @@ TagManager:
   - attack
   - hitbox
   - playerHitbox
-  - 
+  - pickups
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: misc
+    uniqueID: 1431099829
     locked: 0
   - name: Player
     uniqueID: 1094459901

@@ -1,6 +1,3 @@
-dash disabled via keybind (to esc), double jump disabled via mobile entity double jump parameter
-
-
 MISC:
 
 super classes' automatic functions start with _ followed by name
@@ -14,11 +11,18 @@ base.function()		<- calls function() from one parent up; only necessary if scrip
 --------------------------------------------------------------------------
 LAYERS:
 
-Default
-
 Background:
 	0	: background tiles
 	10	: wall tiles
+
+	490	: door
+	500	: door frame background
+
+Default:
+
+Misc:
+	-20	: crest ptcls
+	0	: crest
 
 Player
 	0   : base sprite
@@ -28,6 +32,7 @@ Player
 Foreground:
 	0	: tiles
 	50	: parallax foreground
+	500	: door frame foreground
 
 Effects:
 	100 : fog
