@@ -99,7 +99,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -947104639
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 47253507178f4f34185eaca89ceb468c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.2}
@@ -351,7 +351,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 8
   m_Material: {fileID: 6200000, guid: dca96cd0129f4a54e9c14e8189ad4b4d, type: 2}
@@ -470,7 +470,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1094459901
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4bd4c2464596cb84cb2ebb475064a207, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5357,7 +5357,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1094459901
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 100
   m_RenderMode: 0
   m_SortMode: 0
@@ -5888,8 +5888,8 @@ MonoBehaviour:
   knockbackFactor: 2
   isOnGround: 0
   sameJumpAndUp: 0
-  spd: 9
-  jumpPwr: 24
+  spd: 10
+  jumpPwr: 26
   slashAnim: {fileID: 1915926054236966074}
   playerAnimator: {fileID: 5932368130285967874}
   slashCol: {fileID: 4089410118452266604}
