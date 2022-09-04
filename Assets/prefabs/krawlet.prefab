@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed0c3245c5d12a4da225fd52582797e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrollerScr: {fileID: 4993150176321851255}
+  patrollerScr: {fileID: 0}
 --- !u!68 &8076700611554092295
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -77,7 +77,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3622370208097042871}
   - component: {fileID: 2440718004043332164}
-  - component: {fileID: 4993150176321851255}
+  - component: {fileID: 6975689720722925765}
   m_Layer: 9
   m_Name: hitbox
   m_TagString: Untagged
@@ -125,7 +125,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4993150176321851255
+--- !u!114 &6975689720722925765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,16 +134,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1414206588126992032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de12957224f7b97448e076ac1b6821ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 6abebe55f95454e43a54e603965269c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 20
   hp: 20
   screenShake: 7
-  trfm: {fileID: 1794393725585258488}
+  trfm: {fileID: 3622370208097042871}
   isHighestParent: 0
   rb: {fileID: 2278440661266250546}
-  knockbackFactor: 1.2
+  knockbackFactor: 1
   isOnGround: 0
   spd: 1
   every2: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607aeed3cffc1824e97f8e333650f9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobileEntityScr: {fileID: 4993150176321851255}
+  mobileEntityScr: {fileID: 0}
 --- !u!61 &735005988256512134
 BoxCollider2D:
   m_ObjectHideFlags: 0
