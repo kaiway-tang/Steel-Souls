@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed0c3245c5d12a4da225fd52582797e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrollerScr: {fileID: 0}
+  patrollerScr: {fileID: 6975689720722925765}
 --- !u!68 &8076700611554092295
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607aeed3cffc1824e97f8e333650f9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mobileEntityScr: {fileID: 0}
+  mobileEntityScr: {fileID: 6975689720722925765}
 --- !u!61 &735005988256512134
 BoxCollider2D:
   m_ObjectHideFlags: 0
