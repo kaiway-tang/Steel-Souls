@@ -7,8 +7,7 @@ public class shelley : enemy
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Sprite[] sprites; //0: default  1: ball
     Transform plyrTrfm;
-    int cd, terrainLayerMask = 1 << 6;
-    RaycastHit2D hit;
+    int cd, atkTmr;
     bool every2, isRolling, passedBy;
 
     private void Start()
@@ -40,7 +39,7 @@ public class shelley : enemy
             {
                 SetRelativeVelX(9);
 
-                if ((passedBy && Mathf.Abs(trfm.position.x - plyrTrfm.position.x) > 5) || cd < 1)
+                if ((passedBy && Mathf.Abs(trfm.position.x - plyrTrfm.position.x) > 5) || cd < 50)
                 {
                     stopRolling();
                 }
@@ -59,9 +58,7 @@ public class shelley : enemy
     {
         if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 14 && Mathf.Abs(trfm.position.y - plyrTrfm.position.y) < 6)
         {
-            hit = Physics2D.Linecast(trfm.position, plyrTrfm.position, terrainLayerMask);
-
-            if (!hit || (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 6 && Mathf.Abs(trfm.position.y - plyrTrfm.position.y) < 6))
+            if ((Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 6 && Mathf.Abs(trfm.position.y - plyrTrfm.position.y) < 6) || plyrInSight())
             {
                 if (!isRolling)
                 {
