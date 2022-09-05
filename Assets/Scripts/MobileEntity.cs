@@ -43,6 +43,13 @@ public class MobileEntity : HPEntity
         }
     }
 
+    protected void SetRelativeVelX(float val)
+    {
+        if (currentFacing == leftFace) val = -val;
+        vect2.x = val; vect2.y = rb.velocity.y;
+        rb.velocity = vect2;
+    }
+
     protected void SetVelX(float val)
     {
         vect2.x = val; vect2.y = rb.velocity.y;

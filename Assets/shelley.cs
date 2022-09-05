@@ -9,11 +9,11 @@ public class shelley : enemy
     Transform plyrTrfm;
     int cd, terrainLayerMask = 1 << 6;
     RaycastHit2D hit;
-    bool every2;
+    bool every2, isRolling, passedBy;
 
     private void Start()
     {
-        jumpPower = 15;
+        jumpPower = 27;
         plyrTrfm = Toolbox.playerTrfm;
     }
 
@@ -25,20 +25,31 @@ public class shelley : enemy
         {
             if (cd == 126)
             {
-                if (currentFacing == rightFace) SetVelX(9);
-                else SetVelX(-9);
                 rb.drag = 0;
             }
-            if (cd < 50 && Mathf.Abs(trfm.position.x - plyrTrfm.position.x) > 5)
+            cd--;
+        }
+
+        if (isRolling)
+        {
+
+            if (currentFacing == rightFace) trfm.Rotate(Vector3.forward * -30);
+            else trfm.Rotate(Vector3.forward * 30);
+
+            if (cd < 126)
             {
-                SetVelX(0);
-                rb.drag = 1;
+                SetRelativeVelX(9);
+
+                if ((passedBy && Mathf.Abs(trfm.position.x - plyrTrfm.position.x) > 5) || cd < 1)
+                {
+                    stopRolling();
+                }
             } else
             {
-                if (currentFacing == rightFace) trfm.Rotate(Vector3.forward * 15);
-                else trfm.Rotate(Vector3.forward * 15);
+                SetRelativeVelX(5);
             }
-            cd--;
+
+            if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 1) passedBy = true;
         }
 
         if (every2) everyTwo();
@@ -46,18 +57,23 @@ public class shelley : enemy
     }
     void everyTwo()
     {
-        if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 10 && Mathf.Abs(trfm.position.y - plyrTrfm.position.y) < 6)
+        if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 14 && Mathf.Abs(trfm.position.y - plyrTrfm.position.y) < 6)
         {
             hit = Physics2D.Linecast(trfm.position, plyrTrfm.position, terrainLayerMask);
 
-            if (!hit)
+            if (!hit || (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 6 && Mathf.Abs(trfm.position.y - plyrTrfm.position.y) < 6))
             {
-                if (trfm.position.x - plyrTrfm.position.x > 0) FaceDir(leftFace);
-                else FaceDir(rightFace);
-                if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 7)
+                if (!isRolling)
                 {
-                    if (cd < 1)
+                    if (trfm.position.x - plyrTrfm.position.x > 0) FaceDir(leftFace);
+                    else FaceDir(rightFace);
+                }
+
+                if (cd < 1)
+                {
+                    if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 10)
                     {
+                        isRolling = true;
                         Jump();
                         rend.sprite = sprites[1];
                         cd = 150;
@@ -65,5 +81,15 @@ public class shelley : enemy
                 }
             }
         }
+    }
+
+    void stopRolling()
+    {
+        SetVelX(0);
+        rb.drag = 1;
+        trfm.rotation = Quaternion.identity;
+        rend.sprite = sprites[0];
+        isRolling = false;
+        passedBy = false;
     }
 }

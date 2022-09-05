@@ -334,7 +334,10 @@ MonoBehaviour:
   rb: {fileID: 2278440661266250546}
   knockbackFactor: 1
   isOnGround: 0
-  rb: {fileID: 2278440661266250546}
+  rend: {fileID: 8633710700544342943}
+  sprites:
+  - {fileID: 21300000, guid: 694bb845ef099914eaf533abba12e77a, type: 3}
+  - {fileID: 21300000, guid: f6e36c3dd479b2748a473100edbb6e0b, type: 3}
 --- !u!1 &6417852487474715490
 GameObject:
   m_ObjectHideFlags: 0
