@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class attack : MonoBehaviour
 {
-    [SerializeField] protected int entityID, damage, knockback;
+    [SerializeField] protected int entityID, damage, knockback, attackTag;
     [SerializeField] protected Transform sourceTrfm;
     HPEntity HPScr;
     protected void _OnTriggerEnter2D(Collider2D col)
@@ -29,7 +29,7 @@ public class attack : MonoBehaviour
 
     protected void _OnTriggerEnter2D(HPEntity pHPScr)
     {
-        if (pHPScr.TakeDamage(damage, entityID))
+        if (pHPScr.TakeDamage(damage, entityID, attackTag))
         {
             pHPScr.knockback(pHPScr.GetPosX() - sourceTrfm.position.x, pHPScr.GetPosY() - sourceTrfm.position.y, knockback, entityID);
         }

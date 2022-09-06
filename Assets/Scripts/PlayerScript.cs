@@ -11,6 +11,7 @@ public class PlayerScript : MobileEntity
 
     [SerializeField] ManualAnimator slashAnim;
     [SerializeField] Animator playerAnimator;
+    [SerializeField] SpriteRenderer[] rend;
     int defaultState, overrideState;
     int[] animPriorities = {0, 10, 100, 190, 130, 20, 25}, animQue = new int[5];
     const int idle = 0, walking = 1, basicSlash = 2, ultSlash = 3, dash = 4, jump = 5, djump = 6;
@@ -19,7 +20,7 @@ public class PlayerScript : MobileEntity
     int walkState;
     const int walkStopped = 0, walkRight = 1, walkLeft = 2;
 
-    [SerializeField] Collider2D slashCol, ultCol, hitboxCol;
+    [SerializeField] Collider2D slashCol, ultCol, dashCol, hitboxCol;
     [SerializeField] ParticleSystem dashPtclSys;
     [SerializeField] circleSlashAnimation ultimateAnimScr;
     Vector3 dashVect;
@@ -95,16 +96,18 @@ public class PlayerScript : MobileEntity
                 DequeAnimation(dash);
                 dashPtclSys.Stop();
                 enableHitbox();
+                setColor(Color.white);
+                dashCol.enabled = false;
             }
         }
         if (slashTmr > 0)
         {
             slashTmr--;
+            if (slashTmr == 5) slashCol.enabled = false;
             if (slashTmr < 1)
             {
                 lockFacing--;
                 DequeAnimation(basicSlash);
-                slashCol.enabled = false;
             }
         }
         if (ultTmr > 0)
@@ -215,13 +218,15 @@ public class PlayerScript : MobileEntity
     {
         SetKnocked(7);
         setNoGravity(7);
-        dashVect = GetAimDirectionVector() * 30;
+        dashVect = GetAimDirectionVector() * 35;
         rb.velocity = dashVect;
         mobilityTmr = 7;
         mobilityCD = 40;
         dashPtclSys.Play();
         QueAnimation(dash);
         disableHitbox();
+        setColor(Color.black);
+        dashCol.enabled = true;
     }
     void castUltimate()
     {
@@ -275,6 +280,20 @@ public class PlayerScript : MobileEntity
 
 
 
+
+
+
+
+
+
+
+    void setColor(Color col)
+    {
+        for (int i = 0; i < rend.Length; i++)
+        {
+            rend[i].color = col;
+        }
+    }
 
     int lastAim;
     const int aimW = 0, aimWD = 1, aimD = 2, aimSD = 3, aimS = 4, aimSA = 5, aimA = 6, aimWA = 7;

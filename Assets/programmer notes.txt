@@ -36,10 +36,13 @@ Foreground:
 	500	: door frame foreground
 
 Effects:
+	0-10: lasers
 	100 : fog
 	400	: slashFX
 	410	: front slash
-	
+
+HUD:
+	50-60: HP systems
 
 --------------------------------------------------------------------------
 

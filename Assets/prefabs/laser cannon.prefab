@@ -219,6 +219,9 @@ MonoBehaviour:
   screenShake: 7
   trfm: {fileID: 2481565902120125429}
   isHighestParent: 1
+  showHP: 0
+  hpBarScr: {fileID: 0}
+  deathFX: {fileID: 7383451246931837583, guid: bd306aba8ab2fd34985127584b832d03, type: 3}
 --- !u!114 &2481565902120124939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,7 +463,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 3}
+  m_Size: {x: 20, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2481565902719086602
 MonoBehaviour:
@@ -477,6 +480,7 @@ MonoBehaviour:
   entityID: 0
   damage: 10
   knockback: 6
+  attackTag: 0
   sourceTrfm: {fileID: 2481565901881155642}
 --- !u!1 &2481565903111101063
 GameObject:

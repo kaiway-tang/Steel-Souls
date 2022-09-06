@@ -6,10 +6,13 @@ public class HPEntity : MonoBehaviour
 {
     [SerializeField] int maxHP, hp, screenShake;
     [SerializeField] protected Transform trfm;
-    [SerializeField] bool isHighestParent;
+    [SerializeField] bool isHighestParent, showHP;
+    [SerializeField] hpBar hpBarScr;
+    [SerializeField] GameObject deathFX;
 
     protected int entityID, invulnerable;
     public static int undefinedID = 0, playerID = 1;
+    public static int untagged = 0, dashTag = 1;
 
     private void Start() { _Start(); }
     protected void _Start(int pEntityID = 0) { entityID = pEntityID; hp = maxHP; }
@@ -17,7 +20,7 @@ public class HPEntity : MonoBehaviour
     {
         if (invulnerable > 0) invulnerable--;
     }
-    public bool TakeDamage(int amount, int ignoreID = -1) //return false if entity died OR if attack did not succeed
+    public bool TakeDamage(int amount, int ignoreID = -1, int tag = 0) //return false if entity died OR if attack did not succeed
     {
         if (ignoreID == entityID || invulnerable > 0) return false;
         if (entityID == 1)
@@ -26,8 +29,13 @@ public class HPEntity : MonoBehaviour
             invulnerable += 50;
         }
         hp -= amount;
+        if (showHP)
+        {
+            hpBarScr.lerpHPPercent(hp/(maxHP * 1f));
+        }
         if (hp <= 0)
         {
+            if (tag == dashTag) Toolbox.plyrScript.Heal((int)(maxHP*.1f));
             Die();
             return false;
         }
@@ -46,14 +54,18 @@ public class HPEntity : MonoBehaviour
         if (hp >= maxHP)
         {
             hp = maxHP;
+            if (showHP) hpBarScr.lerpHPPercent(hp / (maxHP * 1f));
             return true;
         }
+        if (showHP) hpBarScr.lerpHPPercent(hp / (maxHP * 1f));
+
         return false;
     }
 
     void Die()
     {
         Toolbox.camScr.AddTrauma(screenShake);
+        Instantiate(deathFX, trfm.position, trfm.rotation);
         Destroy(trfm.gameObject);
     }
     Transform GetHighestParent(Transform pTrfm)

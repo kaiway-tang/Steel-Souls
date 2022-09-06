@@ -127,10 +127,14 @@ MonoBehaviour:
   screenShake: 8
   trfm: {fileID: 1794393725585258488}
   isHighestParent: 0
+  showHP: 0
+  hpBarScr: {fileID: 0}
+  deathFX: {fileID: 7383451246931837583, guid: bd306aba8ab2fd34985127584b832d03, type: 3}
   rb: {fileID: 2278440661266250546}
   knockbackFactor: 0.6
   isOnGround: 0
   cd: 0
+  giveUpCheck: 0
 --- !u!1 &3324979525546947701
 GameObject:
   m_ObjectHideFlags: 0
