@@ -19,7 +19,7 @@ public class PlayerScript : MobileEntity
     int walkState;
     const int walkStopped = 0, walkRight = 1, walkLeft = 2;
 
-    [SerializeField] Collider2D slashCol, ultCol;
+    [SerializeField] Collider2D slashCol, ultCol, hitboxCol;
     [SerializeField] ParticleSystem dashPtclSys;
     [SerializeField] circleSlashAnimation ultimateAnimScr;
     Vector3 dashVect;
@@ -47,6 +47,7 @@ public class PlayerScript : MobileEntity
             Jump();
             if (remainingJumps == 0)
             {
+                playerAnimator.Play("Base Layer.djump",0,0);
                 QueAnimation(djump);
                 djumpDeque = 2;
             }
@@ -93,6 +94,7 @@ public class PlayerScript : MobileEntity
                 ZeroVelocity();
                 DequeAnimation(dash);
                 dashPtclSys.Stop();
+                enableHitbox();
             }
         }
         if (slashTmr > 0)
@@ -113,6 +115,7 @@ public class PlayerScript : MobileEntity
                 lockFacing--;
                 DequeAnimation(ultSlash);
                 ultCol.enabled = false;
+                enableHitbox();
             }
         }
 
@@ -218,6 +221,7 @@ public class PlayerScript : MobileEntity
         mobilityCD = 40;
         dashPtclSys.Play();
         QueAnimation(dash);
+        disableHitbox();
     }
     void castUltimate()
     {
@@ -229,6 +233,7 @@ public class PlayerScript : MobileEntity
         ultCol.enabled = true;
         lockFacing++;
         QueAnimation(ultSlash);
+        disableHitbox();
     }
 
 
@@ -238,16 +243,35 @@ public class PlayerScript : MobileEntity
     {
         switch (GetAimDirection())
         {
-            case aimW:
-                knockback(0,1,strength);
+            case aimS:
+                knockback(0, 1, strength, 0, 9);
+                remainingJumps = 1;
+                break;
+            case aimSD:
+                knockback(-1, 1, strength * 1.2f, 0, 9);
+                remainingJumps = 1;
+                break;
+            case aimSA:
+                knockback(1, 1, strength * 1.2f, 0, 9);
+                remainingJumps = 1;
                 break;
             default:
                 break;
         }
     }
 
+    int hitboxDisable;
+    void disableHitbox()
+    {
+        hitboxDisable++;
+        hitboxCol.enabled = false;
+    }
 
-
+    void enableHitbox()
+    {
+        hitboxDisable--;
+        if (hitboxDisable < 1) hitboxCol.enabled = true;
+    }
 
 
 

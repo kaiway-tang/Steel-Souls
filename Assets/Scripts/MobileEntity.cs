@@ -43,20 +43,23 @@ public class MobileEntity : HPEntity
         }
     }
 
-    protected void SetRelativeVelX(float val)
+    protected void SetRelativeVelX(float val, bool overrideKnocked = false)
     {
+        if (IsKnocked() && !overrideKnocked) return;
         if (currentFacing == leftFace) val = -val;
         vect2.x = val; vect2.y = rb.velocity.y;
         rb.velocity = vect2;
     }
 
-    protected void SetVelX(float val)
+    protected void SetVelX(float val, bool overrideKnocked = false)
     {
+        if (IsKnocked() && !overrideKnocked) return;
         vect2.x = val; vect2.y = rb.velocity.y;
         rb.velocity = vect2;
     }
-    protected void AddVelX(float val)
+    protected void AddVelX(float val, bool overrideKnocked = false)
     {
+        if (IsKnocked() && !overrideKnocked) return;
         if (val > 0 && rb.velocity.x < maxSpeed)
         {
             vect2.x += val; vect2.y = rb.velocity.y;
@@ -69,8 +72,9 @@ public class MobileEntity : HPEntity
             rb.velocity = vect2;
         }
     }
-    protected void SetVelY(float val)
+    protected void SetVelY(float val, bool overrideKnocked = false)
     {
+        if (IsKnocked() && !overrideKnocked) return;
         vect2.x = rb.velocity.x; vect2.y = val;
         rb.velocity = vect2;
     }
@@ -93,9 +97,9 @@ public class MobileEntity : HPEntity
         trfm.localScale = vect3;
     }
 
-    protected void Jump()
+    protected void Jump(bool overrideKnocked = false)
     {
-        if (!IsKnocked())
+        if (!IsKnocked() || overrideKnocked)
         {
             if (isOnGround)
             {
@@ -129,16 +133,14 @@ public class MobileEntity : HPEntity
             rb.sharedMaterial = Toolbox.frictionMaterial;
         }
     }
-    public override void knockback(float x, float y, int strength, int ignoreID = -1)
+    public override void knockback(float x, float y, float strength, int ignoreID = -1, int knockedDuration = -1)
     {
         if (entityID == ignoreID) return;
-        strength = (int)(strength * knockbackFactor);
-        vect2.x = x - trfm.position.x;
-        vect2.y = y - trfm.position.y;
-        vect2.Normalize();
-        vect2.y -= .2f;
-        rb.velocity = vect2 * -strength;
-        SetKnocked((int)(strength*.5f));
+        strength = strength * knockbackFactor;
+        vect2.x = x; vect2.y = y;
+        rb.velocity = vect2.normalized * strength;
+        if (knockedDuration > -1) SetKnocked(knockedDuration);
+        else SetKnocked((int)(strength * 1.2f));
     }
 
     protected bool HasGravity()

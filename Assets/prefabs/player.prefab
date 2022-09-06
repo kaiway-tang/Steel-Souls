@@ -5894,6 +5894,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 5932368130285967874}
   slashCol: {fileID: 4089410118452266604}
   ultCol: {fileID: 4663204128033487712}
+  hitboxCol: {fileID: 1615459549428884142}
   dashPtclSys: {fileID: 5352799993773423271}
   ultimateAnimScr: {fileID: 2747536126939458671}
   recoilCD: 0
