@@ -6,7 +6,7 @@ public class MobileEntity : HPEntity
 {
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] float knockbackFactor = 1;
-    Vector2 vect2; Vector3 vect3;
+    protected Vector2 vect2; protected Vector3 vect3;
 
     protected bool currentFacing;
     protected int doubleJumps, remainingJumps, lockFacing;

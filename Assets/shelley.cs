@@ -6,14 +6,13 @@ public class shelley : enemy
 {
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Sprite[] sprites; //0: default  1: ball
-    Transform plyrTrfm;
     int cd, atkTmr;
     bool every2, isRolling, passedBy;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         jumpPower = 27;
-        plyrTrfm = Toolbox.playerTrfm;
     }
 
     void FixedUpdate()
@@ -22,7 +21,7 @@ public class shelley : enemy
 
         if (cd > 0)
         {
-            if (cd == 126)
+            if (cd == 226)
             {
                 rb.drag = 0;
             }
@@ -35,20 +34,24 @@ public class shelley : enemy
             if (currentFacing == rightFace) trfm.Rotate(Vector3.forward * -30);
             else trfm.Rotate(Vector3.forward * 30);
 
-            if (cd < 126)
+            if (cd < 226)
             {
                 SetRelativeVelX(9);
 
-                if ((passedBy && Mathf.Abs(trfm.position.x - plyrTrfm.position.x) > 5) || cd < 50)
+                if ((passedBy && Mathf.Abs(trfm.position.x - plyrTrfm.position.x) > 5) || cd == 150)
                 {
                     stopRolling();
+                    cd = Random.Range(25,70);
                 }
             } else
             {
                 SetRelativeVelX(5);
             }
 
-            if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 1) passedBy = true;
+            if (Mathf.Abs(trfm.position.x - plyrTrfm.position.x) < 1)
+            {
+                passedBy = true;
+            }
         }
 
         if (every2) everyTwo();
@@ -62,8 +65,7 @@ public class shelley : enemy
             {
                 if (!isRolling)
                 {
-                    if (trfm.position.x - plyrTrfm.position.x > 0) FaceDir(leftFace);
-                    else FaceDir(rightFace);
+                    facePlayerLR();
                 }
 
                 if (cd < 1)
@@ -73,7 +75,7 @@ public class shelley : enemy
                         isRolling = true;
                         Jump();
                         rend.sprite = sprites[1];
-                        cd = 150;
+                        cd = 250;
                     }
                 }
             }

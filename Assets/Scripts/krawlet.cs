@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class krawlet : patroller
 {
-    private void Start()
+    private new void Start()
     {
         _Start();
     }
