@@ -6,7 +6,7 @@ public class patroller : enemy
 {
     [SerializeField] float spd;
     int flipTmr, perSec;
-    [SerializeField] bool every2, knocked;
+    bool every2, knocked;
     private new void Start()
     {
         _Start();

@@ -6,8 +6,8 @@ public class HPEntity : MonoBehaviour
 {
     [SerializeField] int maxHP, hp, screenShake;
     [SerializeField] protected Transform trfm;
-    [SerializeField] bool isHighestParent, showHP;
-    [SerializeField] hpBar hpBarScr;
+    [SerializeField] bool isHighestParent, showHP, specialDeath;
+    [SerializeField] scaler hpBarScr;
     [SerializeField] GameObject deathFX;
 
     protected int entityID, invulnerable;
@@ -31,7 +31,7 @@ public class HPEntity : MonoBehaviour
         hp -= amount;
         if (showHP)
         {
-            hpBarScr.lerpHPPercent(hp/(maxHP * 1f));
+            hpBarScr.lerpPercent(hp/(maxHP * 1f));
         }
         if (hp <= 0)
         {
@@ -54,10 +54,10 @@ public class HPEntity : MonoBehaviour
         if (hp >= maxHP)
         {
             hp = maxHP;
-            if (showHP) hpBarScr.lerpHPPercent(hp / (maxHP * 1f));
+            if (showHP) hpBarScr.lerpPercent(hp / (maxHP * 1f));
             return true;
         }
-        if (showHP) hpBarScr.lerpHPPercent(hp / (maxHP * 1f));
+        if (showHP) hpBarScr.lerpPercent(hp / (maxHP * 1f));
 
         return false;
     }
@@ -66,7 +66,12 @@ public class HPEntity : MonoBehaviour
     {
         Toolbox.camScr.AddTrauma(screenShake);
         Instantiate(deathFX, trfm.position, trfm.rotation);
-        Destroy(trfm.gameObject);
+        if (!specialDeath) Destroy(trfm.gameObject);
+        else
+        {
+            gameObject.SetActive(false);
+            manager.self.deathTxt.SetActive(true);
+        }
     }
     Transform GetHighestParent(Transform pTrfm)
     {

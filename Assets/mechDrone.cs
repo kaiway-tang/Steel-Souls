@@ -35,7 +35,7 @@ public class mechDrone : enemy
     }
     void everyTwo()
     {
-        if ((Toolbox.inBoxRange(trfm.position, plyrTrfm.position, 10) || locked) && plyrInSight())
+        if ((Toolbox.inBoxRange(trfm.position, plyrTrfm.position, 8) || locked) && plyrInSight())
         {
             if (!locked)
             {

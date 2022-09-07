@@ -12,8 +12,11 @@ public class sceneTransition : MonoBehaviour
     {
         if (transition)
         {
-            if (rend.color.a > 1) SceneManager.LoadScene("Jason Cave");
+            if (rend.color.a > 1) SceneManager.LoadScene("Cave Final");
             rend.color += col;
+        } else if (Input.GetKey(KeyCode.Tab))
+        {
+            transition = true;
         }
     }
 

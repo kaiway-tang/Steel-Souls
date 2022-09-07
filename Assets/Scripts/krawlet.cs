@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class krawlet : patroller
 {
+    [SerializeField] Transform spriteTrfm;
     [SerializeField] Vector3 stretchRate;
     bool stretchIncr, every2;
     private new void Start()
@@ -21,12 +22,12 @@ public class krawlet : patroller
     {
         if (stretchIncr)
         {
-            if (trfm.localScale.x > 1) stretchIncr = false;
-            trfm.localScale += stretchRate;
+            if (spriteTrfm.localScale.x > 1.2) stretchIncr = false;
+            spriteTrfm.localScale += stretchRate;
         } else
         {
-            trfm.localScale -= stretchRate;
-            if (trfm.localScale.x < .6f) stretchIncr = true;
+            spriteTrfm.localScale -= stretchRate;
+            if (spriteTrfm.localScale.x < 1f) stretchIncr = true;
         }
     }
 }

@@ -26,6 +26,7 @@ public class PlayerScript : MobileEntity
     Vector3 dashVect;
     int slashTmr, mobilityTmr, ultTmr;
     int basicCD, mobilityCD, ultimateCD, specialCD;
+    [SerializeField] scaler[] cdScalers;
     public int recoilCD;
     bool groundedCheck;
 
@@ -172,8 +173,16 @@ public class PlayerScript : MobileEntity
         }
 
         if (basicCD > 0) basicCD--;
-        if (mobilityCD > 0) mobilityCD--;
-        if (ultimateCD > 0) ultimateCD--;
+        if (mobilityCD > 0)
+        {
+            mobilityCD--;
+            cdScalers[0].setPercent(1f * mobilityCD / 40);
+        }
+        if (ultimateCD > 0)
+        {
+            ultimateCD--;
+            cdScalers[1].setPercent(1f * ultimateCD/400);
+        }
         if (specialCD > 0) specialCD--;
         if (recoilCD > 0) recoilCD--;
     }

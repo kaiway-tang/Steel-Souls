@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Beach.unity
     guid: e33c895e047b014459c291f8ae88dbe6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Jason Cave.unity
     guid: c98bc3e1bd1142e42bc223bca8bfd771
+  - enabled: 1
+    path: Assets/Scenes/Cave Final.unity
+    guid: ceb85d60fef77d746bda0386ceae2a78
   m_configObjects: {}

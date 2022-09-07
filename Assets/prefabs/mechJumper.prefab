@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.4, y: 1.5}
   m_EdgeRadius: 0
 --- !u!212 &572426411548921341
 SpriteRenderer:
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf62c9a7b8c672949acc44ffafe3548c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 80
-  hp: 80
+  maxHP: 100
+  hp: 100
   screenShake: 8
   trfm: {fileID: 1794393725585258488}
   isHighestParent: 0
@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1794393725585258488}
   - component: {fileID: 2278440661266250546}
-  - component: {fileID: 7814270132761989142}
+  - component: {fileID: 7122096919683927932}
   m_Layer: 0
   m_Name: mechJumper
   m_TagString: Untagged
@@ -162,7 +162,7 @@ Transform:
   m_GameObject: {fileID: 3324979525546947701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children:
   - {fileID: 3622370208097042871}
   - {fileID: 5888769051134583897}
@@ -191,8 +191,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &7814270132761989142
-CircleCollider2D:
+--- !u!61 &7122096919683927932
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -204,9 +204,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.3}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 2, y: 0.8}
+  m_EdgeRadius: 0
 --- !u!1 &5586911016555680804
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,10 +259,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
+  m_Offset: {x: 0, y: 0.8}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -263,7 +273,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &5422647152701364043
 MonoBehaviour:
@@ -280,6 +290,7 @@ MonoBehaviour:
   entityID: 0
   damage: 10
   knockback: 6
+  attackTag: 0
   sourceTrfm: {fileID: 6339642800986629361}
 --- !u!1 &6417852487474715490
 GameObject:
