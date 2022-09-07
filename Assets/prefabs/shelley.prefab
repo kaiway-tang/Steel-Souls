@@ -333,10 +333,11 @@ MonoBehaviour:
   trfm: {fileID: 1794393725585258488}
   isHighestParent: 0
   showHP: 0
+  specialDeath: 0
   hpBarScr: {fileID: 0}
   deathFX: {fileID: 4182872917543909866, guid: 24bc088633e8ee24f9b25b1658e4b48a, type: 3}
   rb: {fileID: 2278440661266250546}
-  knockbackFactor: 1
+  knockbackFactor: 1.5
   isOnGround: 0
   rend: {fileID: 8633710700544342943}
   sprites:

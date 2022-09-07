@@ -28,6 +28,7 @@ Misc:
 Player
 	0   : base sprite
 	100 : dashFX (particles)
+	150	: healFX
 	200 : slashFX (slash sprite)
 
 Foreground:

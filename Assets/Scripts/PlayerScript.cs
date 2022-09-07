@@ -29,8 +29,16 @@ public class PlayerScript : MobileEntity
     [SerializeField] scaler[] cdScalers;
     public int recoilCD;
     bool groundedCheck;
+    public ParticleSystem healPtclSys;
 
     Vector3 vect3a, vect3b;
+
+    public static PlayerScript self;
+
+    private void Awake()
+    {
+        self = this;
+    }
 
     private void Start()
     {

@@ -6,7 +6,7 @@ public class HPEntity : MonoBehaviour
 {
     [SerializeField] int maxHP, hp, screenShake;
     [SerializeField] protected Transform trfm;
-    [SerializeField] bool isHighestParent, showHP, specialDeath;
+    [SerializeField] bool isHighestParent, showHP, isPlayer;
     [SerializeField] scaler hpBarScr;
     [SerializeField] GameObject deathFX;
 
@@ -51,6 +51,13 @@ public class HPEntity : MonoBehaviour
     public bool Heal(int amount) //return true if entity is now full hp
     {
         hp += amount;
+        if (isPlayer)
+        {
+            PlayerScript.self.healPtclSys.Stop();
+            var main = PlayerScript.self.healPtclSys.main;
+            main.duration = amount * .1f;
+            PlayerScript.self.healPtclSys.Play();
+        }
         if (hp >= maxHP)
         {
             hp = maxHP;
@@ -66,7 +73,7 @@ public class HPEntity : MonoBehaviour
     {
         Toolbox.camScr.AddTrauma(screenShake);
         Instantiate(deathFX, trfm.position, trfm.rotation);
-        if (!specialDeath) Destroy(trfm.gameObject);
+        if (!isPlayer) Destroy(trfm.gameObject);
         else
         {
             gameObject.SetActive(false);

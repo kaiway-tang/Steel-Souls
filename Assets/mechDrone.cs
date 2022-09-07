@@ -19,7 +19,7 @@ public class mechDrone : enemy
         {
             if (charging)
             {
-                rb.velocity += plyrDirectionVector();
+                rb.velocity += plyrDirectionVector() * .8f;
             }
             if (cd == 240)
             {
@@ -35,7 +35,7 @@ public class mechDrone : enemy
     }
     void everyTwo()
     {
-        if ((Toolbox.inBoxRange(trfm.position, plyrTrfm.position, 8) || locked) && plyrInSight())
+        if ((Toolbox.inBoxRange(trfm.position, plyrTrfm.position, 7) || locked) && plyrInSight())
         {
             if (!locked)
             {
@@ -60,7 +60,7 @@ public class mechDrone : enemy
                         addPlyrDirectionVelocity(.5f);
                     }
                     else if (trfm.position.y - plyrTrfm.position.y > 6) rb.velocity += Vector2.up * -.2f;
-                    if (cd < 1 && Toolbox.inBoxRange(trfm.position, plyrTrfm.position, 12))
+                    if (cd < 1 && Toolbox.inBoxRange(trfm.position, plyrTrfm.position, 7))
                     {
                         cd = 300;
                         largeFlames.Play();
