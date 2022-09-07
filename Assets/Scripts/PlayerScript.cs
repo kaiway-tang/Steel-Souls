@@ -75,6 +75,13 @@ public class PlayerScript : MobileEntity
     }
     private void FixedUpdate()
     {
+        if (Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.Z) && GetMaxHP() == 50)
+        {
+            maxHP = 150;
+            hpBarScr.setPercent(1f * hp/maxHP);
+            Heal(100);
+        }
+
         _FixedUpdate();
 
         if (groundedCheck != isOnGround)

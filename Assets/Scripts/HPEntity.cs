@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HPEntity : MonoBehaviour
 {
-    [SerializeField] int maxHP, hp, screenShake;
+    [SerializeField] protected int maxHP, hp, screenShake;
     [SerializeField] protected Transform trfm;
     [SerializeField] bool isHighestParent, showHP, isPlayer;
-    [SerializeField] scaler hpBarScr;
+    [SerializeField] protected scaler hpBarScr;
     [SerializeField] GameObject deathFX;
 
     protected int entityID, invulnerable;
@@ -55,7 +55,8 @@ public class HPEntity : MonoBehaviour
         {
             PlayerScript.self.healPtclSys.Stop();
             var main = PlayerScript.self.healPtclSys.main;
-            main.duration = amount * .1f;
+            if (amount > 20) main.duration = 2;
+            else main.duration = amount * .1f;
             PlayerScript.self.healPtclSys.Play();
         }
         if (hp >= maxHP)
