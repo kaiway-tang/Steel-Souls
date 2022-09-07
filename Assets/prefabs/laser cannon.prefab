@@ -214,8 +214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992a3bfdfc89fad44952495b5c3c2190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 50
-  hp: 50
+  maxHP: 40
+  hp: 40
   screenShake: 7
   trfm: {fileID: 2481565902120125429}
   isHighestParent: 1

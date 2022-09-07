@@ -23,7 +23,7 @@ public class patroller : enemy
             SetVelX(spd);
         }
     }
-    private void FixedUpdate()
+    protected void FixedUpdate()
     {
         _FixedUpdate();
         if (every2) everyTwo();
