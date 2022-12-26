@@ -7,5 +7,5 @@ Jason Lin (art);
 Insoo Yoon (art);
 Cristopher Navarro (art);
 
-Play it here!;
+Play it here!  
 kaiway.itch.io/steelsouls
