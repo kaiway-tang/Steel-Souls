@@ -6,3 +6,6 @@ Kaiway Tang (programming, art);
 Jason Lin (art);
 Insoo Yoon (art);
 Cristopher Navarro (art);
+
+Play it here!;
+kaiway.itch.io/steelsouls
